@@ -9,6 +9,8 @@ struct RationalNumber {
 bool rnIsValid(RationalNumber n);
 bool rnIsNaN(RationalNumber n);
 bool rnEqual(RationalNumber n, RationalNumber m);
+bool rnLessThan(RationalNumber n, RationalNumber m);
+
 /*
   Compares two RationalNumbers and returns:
  -1 if n < m

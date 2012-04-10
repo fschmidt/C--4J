@@ -17,6 +17,14 @@ bool rnEqual(RationalNumber n, RationalNumber m){
     return (a.denominator == b.denominator && a.nominator == b.nominator);
 }
 
+
+bool rnLessThan(RationalNumber n, RationalNumber m){
+    if(rnCompareTo(n, m) == -1){
+        return true;
+    }
+    return false;
+}
+
 /*
   Compares two RationalNumbers and returns:
  -1 if n < m
@@ -38,28 +46,28 @@ int rnCompareTo(RationalNumber n, RationalNumber m){
 }
 
 RationalNumber rnAdd(RationalNumber n, RationalNumber m){
-    RationalNumber result = new RationalNumber();
+    RationalNumber result;
     result.nominator = n.nominator * m.denominator + n.denominator * m.nominator;
     result.denominator = n.denominator * m.denominator;
     return rnNormalize(result);
 }
 
 RationalNumber rnSub(RationalNumber n, RationalNumber m){
-    RationalNumber result = new RationalNumber();
+    RationalNumber result;
     result.nominator = n.nominator * m.denominator - n.denominator * m.nominator;
     result.denominator = n.denominator * m.denominator;
     return rnNormalize(result);
 }
 
 RationalNumber rnMul(RationalNumber n, RationalNumber m){
-    RationalNumber result = new RationalNumber();
+    RationalNumber result;
     result.nominator = n.nominator*m.nominator;
     result.denominator = n.denominator*m.denominator;
     return result;
 }
 
 RationalNumber rnDiv(RationalNumber n, RationalNumber m) {
-    RationalNumber reciprocus = new RationalNumber();
+    RationalNumber reciprocus;
     reciprocus.nominator = m.denominator;
     reciprocus.denominator = m.nominator;
     return rnMul(n, reciprocus);
