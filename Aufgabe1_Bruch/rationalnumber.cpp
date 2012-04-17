@@ -1,4 +1,4 @@
-#include "rationalnumber.h";
+#include "rationalnumber.h"
 
 RationalNumber rnNormalize(RationalNumber n);
 int euclid(int a, int b);

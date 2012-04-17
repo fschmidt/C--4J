@@ -15,6 +15,8 @@ struct RationalNumberArray {
     typedef void (*callbackFunction) (RationalNumberArray*);
 };
 
+RationalNumber nullNumber(RationalNumberArray *data, int position);
+
 RationalNumberArray* rnaCreate(int size = 10){
     RationalNumberArray* result = (RationalNumberArray*) malloc(sizeof(RationalNumberArray));
     result -> values = (RationalNumber*) malloc(size * sizeof(RationalNumber));
@@ -55,8 +57,9 @@ void rnaSet(RationalNumberArray *data, RationalNumber *value, int position){
 
     if (data->size < position){
         for(int i = data->size; i < position; i++){
-            data->values[i].nominator = 0;
-            data->values[i].denominator = 1;
+            nullNumber(data, i);
+            // data->values[i].nominator = 0;
+            // data->values[i].denominator = 1;
         }
         data->size = position+1;
     }
@@ -75,10 +78,23 @@ RationalNumber rnaGet(RationalNumberArray *data, int position){
 
 void rnaRemove(RationalNumberArray *data, int firstPosition, int lastPosition){
     if(firstPosition < 0 || lastPosition > data->size){
-
+        data->lastError = INVALID_INDEX;
+    } else if(lastPosition < data->size){
+        for(int i = firstPosition; i <= lastPosition; i++){
+            nullNumber(data, i);
+        }
+    } else {
+        data->size = firstPosition;
     }
 }
 
-ErrType* rnaError();
+ErrType* rnaError(RationalNumberArray *data){
+    return data->lastError;
+}
 
 void rnaSetErrorCallback(void (*callbackFunction)(RationalNumberArray*));
+
+RationalNumber nullNumber(RationalNumberArray *data, int position){
+    data->values[position].nominator = 0;
+    data->values[position].denominator = 1;
+}
