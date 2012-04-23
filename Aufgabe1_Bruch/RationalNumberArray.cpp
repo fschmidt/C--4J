@@ -2,6 +2,7 @@
 #include "RationalNumberArray.h"
 
 enum ErrType {
+    NO_ERROR,
     INVALID_OBJECT,
     INVALID_INDEX,
     CANNOT_ALLOCATE_MEMORY
@@ -19,7 +20,20 @@ RationalNumber nullNumber(RationalNumberArray *data, int position);
 
 RationalNumberArray* rnaCreate(int size = 10){
     RationalNumberArray* result = (RationalNumberArray*) malloc(sizeof(RationalNumberArray));
+
+    // check whether memory was allocated
+    if(!result){
+        lastError = CANNOT_ALLOCATE_MEMORY;
+        //callbackFunction(..);
+    }
+
     result -> values = (RationalNumber*) malloc(size * sizeof(RationalNumber));
+
+    // check whether memory was allocated
+    if(!(result -> values)){
+        lastError = CANNOT_ALLOCATE_MEMORY;
+    }
+
     result -> capacity = size;
     result -> size = 0;
     return result;
