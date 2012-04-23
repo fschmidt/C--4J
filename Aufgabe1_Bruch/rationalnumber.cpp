@@ -7,10 +7,19 @@ bool rnIsValid(RationalNumber n){
     return n.denominator != 0;
 }
 
+/*
+  Check whether a given RationalNumber is NaN (Not a Number).
+  returns: True if the given RationalNumber is NaN, False otherwise
+  */
 bool rnIsNaN(RationalNumber n){
     return n.denominator==0;
 }
 
+/*
+  Check whether two given RationalNumbers are equal.
+  RationalNumbers are equal when all requirements for arithmetic equalty of RationalNumbers are met.
+  returns: True if the given RationalNumbers are equal, False otherwise
+  */
 bool rnEqual(RationalNumber n, RationalNumber m){
     RationalNumber a = rnNormalize(n);
     RationalNumber b = rnNormalize(m);
@@ -26,7 +35,8 @@ bool rnLessThan(RationalNumber n, RationalNumber m){
 }
 
 /*
-  Compares two RationalNumbers and returns:
+  Compares two RationalNumbers
+  returns:
  -1 if n < m
   0 if n = m
   1 if n > m
