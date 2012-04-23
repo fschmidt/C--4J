@@ -30,5 +30,3 @@ ErrType* rnaError();
 void rnaSetErrorCallback(void (*callbackFunction)(RationalNumberArray*));
 
 #endif // RATIONALNUMBERARRAY_H
-
-

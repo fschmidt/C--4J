@@ -1,8 +1,13 @@
 #include "rationalnumber.h"
 
 RationalNumber rnNormalize(RationalNumber n);
+
 int euclid(int a, int b);
 
+/*
+  Check whether a given RationalNumber is valid.
+  returns: True if the given RationalNumber is valid, False otherwise
+  */
 bool rnIsValid(RationalNumber n){
     return n.denominator != 0;
 }
@@ -26,7 +31,11 @@ bool rnEqual(RationalNumber n, RationalNumber m){
     return (a.denominator == b.denominator && a.nominator == b.nominator);
 }
 
-
+/*
+  Check whether the arithmetic value of the given RationalNumber n is less
+  than the arithmetic value of the given RationalNumber m.
+  returns: True if n < m, False otherwise
+  */
 bool rnLessThan(RationalNumber n, RationalNumber m){
     if(rnCompareTo(n, m) == -1){
         return true;
@@ -55,6 +64,10 @@ int rnCompareTo(RationalNumber n, RationalNumber m){
     }
 }
 
+/*
+  Basic arithmetic operation Addition for two given RationalNumbers.
+  returns: the result of n + m as a Rational Number
+  */
 RationalNumber rnAdd(RationalNumber n, RationalNumber m){
     RationalNumber result;
     result.nominator = n.nominator * m.denominator + n.denominator * m.nominator;
@@ -62,6 +75,10 @@ RationalNumber rnAdd(RationalNumber n, RationalNumber m){
     return rnNormalize(result);
 }
 
+/*
+  Basic arithmetic operation Subtraction for two given RationalNumbers.
+  returns: the result of n - m as a Rational Number
+  */
 RationalNumber rnSub(RationalNumber n, RationalNumber m){
     RationalNumber result;
     result.nominator = n.nominator * m.denominator - n.denominator * m.nominator;
@@ -69,6 +86,10 @@ RationalNumber rnSub(RationalNumber n, RationalNumber m){
     return rnNormalize(result);
 }
 
+/*
+  Basic arithmetic operation Multiplication for two given RationalNumbers.
+  returns: the result of n * m as a Rational Number
+  */
 RationalNumber rnMul(RationalNumber n, RationalNumber m){
     RationalNumber result;
     result.nominator = n.nominator*m.nominator;
@@ -76,6 +97,10 @@ RationalNumber rnMul(RationalNumber n, RationalNumber m){
     return result;
 }
 
+/*
+  Basic arithmetic operation Division  for two given RationalNumbers.
+  returns: the result of n / m as a Rational Number
+  */
 RationalNumber rnDiv(RationalNumber n, RationalNumber m) {
     RationalNumber reciprocus;
     reciprocus.nominator = m.denominator;
@@ -83,6 +108,10 @@ RationalNumber rnDiv(RationalNumber n, RationalNumber m) {
     return rnMul(n, reciprocus);
 }
 
+/*
+  Normalizes a RationalNumber
+  returns: The normalized RationalNumber
+  */
 RationalNumber rnNormalize(RationalNumber n){
 
     int i = 0;
