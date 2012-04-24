@@ -1,6 +1,10 @@
 #include <stdlib.h>
 #include "RationalNumberArray.h"
 
+/*
+  Struct representing an Array of Rational Number.
+  Use this to call all the fanvy functions for RationalNumber arrays.
+  */
 struct RationalNumberArray {
     RationalNumber *values;
     int size;
@@ -9,18 +13,17 @@ struct RationalNumberArray {
     void (*callbackFunction) (RationalNumberArray*);
 };
 
-RationalNumberArray* rnaCreate(int size){
+/*
+  The constructor for RationalNumberArrays
+  returns: An empty (size=0) RationalNumberArray of the given capacity.
+*/
+RationalNumberArray* rnaCreate(const int size){
     RationalNumberArray* result = (RationalNumberArray*) malloc(sizeof(RationalNumberArray));
-
-    // check whether memory was allocated
-    if(!result){
-        result -> lastError = CANNOT_ALLOCATE_MEMORY;
-    }
 
     result -> values = (RationalNumber*) malloc(size * sizeof(RationalNumber));
 
     // check whether memory was allocated
-    if(!(result -> values)){
+    if((result -> values) == 0){
         result -> lastError = CANNOT_ALLOCATE_MEMORY;
     }
 
@@ -31,25 +34,51 @@ RationalNumberArray* rnaCreate(int size){
     return result;
 }
 
+/*
+  Deletes a RationalNumberArray freeing the memory it used
+*/
 void rnaDelete(RationalNumberArray *data){
     free(data -> values);
     free(data);
 }
 
-void rnaResize(RationalNumberArray *data, int size){
+/*
+  Sets the capacity of the given RationalNumberArray
+*/
+void rnaResize(RationalNumberArray *data, const int size){
     realloc(data -> values, sizeof(RationalNumber) * size);
+    // check whether memory was allocated
+    if((data->values) == 0){
+        data -> lastError = CANNOT_ALLOCATE_MEMORY;
+        if((data->callbackFunction)!=0){
+            data->callbackFunction(data);
+        }
+    }
     data->capacity = size;
+    if(data->size > data->capacity){
+        data->size = data->capacity;
+    }
 }
 
-int rnaSize(RationalNumberArray *data){
+/*
+  returns: The current size (number of elements) of the given RationalNumberArray
+*/
+int rnaSize(RationalNumberArray const * const data){
     return data -> size;
 }
 
-int rnaCapacity(RationalNumberArray *data){
+/*
+  returns: The current capacity of the given RationalNumberArray
+*/
+int rnaCapacity(const RationalNumberArray * const data){
     return data -> capacity;
 }
 
-void rnaAdd(RationalNumberArray *data, RationalNumber *value){
+/*
+  Adds the given RationalNumber at the end of the given RationalNumberArray.
+  Increases the given Arrays capacity if needed.
+*/
+void rnaAdd(RationalNumberArray * const data, RationalNumber const * const value){
     if(data->size == data->capacity){
         rnaResize(data, data->capacity*2);
     }
@@ -58,7 +87,10 @@ void rnaAdd(RationalNumberArray *data, RationalNumber *value){
     data->size++;
 }
 
-void rnaSet(RationalNumberArray *data, RationalNumber *value, int position){
+/*
+  Sets the element of the given RationalNumberArray at the given position to the given value
+*/
+void rnaSet(RationalNumberArray *const data, const RationalNumber *const value, const int position){
     while(position > data->capacity){
         rnaResize(data, data->capacity*2);
     }
@@ -75,7 +107,10 @@ void rnaSet(RationalNumberArray *data, RationalNumber *value, int position){
     data->values[position].nominator = value->nominator;
 }
 
-RationalNumber* rnaGet(RationalNumberArray *data, int position){
+/*
+  returns: the element of the given RationalNumberArray at the given position
+*/
+RationalNumber* rnaGet(RationalNumberArray * const data, const int position){
     if(position >= data -> size) {
         data->lastError = INVALID_INDEX;
         if((data->callbackFunction)!=0){
@@ -86,29 +121,29 @@ RationalNumber* rnaGet(RationalNumberArray *data, int position){
     return &(data->values[position]);
 }
 
-void rnaRemove(RationalNumberArray *data, int firstPosition, int lastPosition){
-    if(firstPosition < 0 || lastPosition >= data->size){
-        data->lastError = INVALID_INDEX;
-        if(data->callbackFunction){
-            data->callbackFunction(data);
-        }
-    } else if(lastPosition < data->size-1){
-        int diff = lastPosition - firstPosition;
-        for(int i = lastPosition; i < data->size; i++){
-            data->values[i-diff].denominator = data->values[i].denominator;
-            data->values[i-diff].nominator = data->values[i].nominator;
-        }
-         data->size = data->size - lastPosition;
-    } else {
-        data->size = firstPosition;
+/*
+  Removes the elements from firstPosition to lastPosition in the given RationalNumberArray and removes the gap.
+*/
+void rnaRemove(RationalNumberArray *data, const int firstPosition, const int lastPosition){
+    int startIndex = firstPosition > 0 ? firstPosition : 0;
+    int endIndex = lastPosition + 1;
+    int oldSize = data->size;
+    data->size = startIndex;
+    while(endIndex < oldSize){
+        rnaAdd(data, &(data->values[endIndex++]));
     }
 }
 
-ErrType* rnaError(RationalNumberArray *data){
+/*
+  returns: the errorType thrown by the last function call if an error occured during call.
+*/
+ErrType const * rnaError(const RationalNumberArray *const data){
     return &(data->lastError);
 }
 
-void rnaSetErrorCallback(RationalNumberArray *data, void (*callbackFunction)(RationalNumberArray*)){
+/*
+  Sets the callback function called when an error is thrown by rna methods other than this.
+  */
+void rnaSetErrorCallback(RationalNumberArray * const data, void (*callbackFunction)(RationalNumberArray*)){
     data->callbackFunction = callbackFunction;
 }
-

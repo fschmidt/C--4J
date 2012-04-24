@@ -6,32 +6,31 @@
 struct RationalNumberArray;
 
 enum ErrType {
-    NO_ERROR,
     INVALID_OBJECT,
     INVALID_INDEX,
     CANNOT_ALLOCATE_MEMORY
 };
 
-RationalNumberArray* rnaCreate(int size = 10);
+RationalNumberArray* rnaCreate(const int size = 10);
 
-void rnaDelete(RationalNumberArray *data);
+void rnaDelete(RationalNumberArray* const data );
 
-void rnaResize(RationalNumberArray *data, int size = 10);
+void rnaResize(RationalNumberArray* data, int size = 10);
 
-int rnaSize(RationalNumberArray *data);
+int rnaSize(RationalNumberArray const * const data);
 
-int rnaCapacity(RationalNumberArray *data);
+int rnaCapacity(RationalNumberArray const * const data);
 
-void rnaAdd(RationalNumberArray *data, RationalNumber *value);
+void rnaAdd(RationalNumberArray * const data, RationalNumber const * const value);
 
-void rnaSet(RationalNumberArray *data, RationalNumber *value, int position);
+void rnaSet(RationalNumberArray * const data, RationalNumber const *const value, const int position);
 
-RationalNumber* rnaGet(RationalNumberArray *data, int position);
+RationalNumber* rnaGet(RationalNumberArray *const data, const int position);
 
-void rnaRemove(RationalNumberArray *data, int firstPosition, int lastPosition);
+void rnaRemove(RationalNumberArray *data, const int firstPosition, const int lastPosition);
 
-ErrType* rnaError(RationalNumberArray *data);
+ErrType const *rnaError(RationalNumberArray const * const data);
 
-void rnaSetErrorCallback(RationalNumberArray *data, void (*callbackFunction)(RationalNumberArray*));
+void rnaSetErrorCallback(RationalNumberArray * const data, void (*callbackFunction)(RationalNumberArray*));
 
 #endif // RATIONALNUMBERARRAY_H
