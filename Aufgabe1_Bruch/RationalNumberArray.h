@@ -5,9 +5,14 @@
 
 struct RationalNumberArray;
 
-enum ErrType;
+enum ErrType {
+    NO_ERROR,
+    INVALID_OBJECT,
+    INVALID_INDEX,
+    CANNOT_ALLOCATE_MEMORY
+};
 
-RationalNumberArray rnaCreate(int size = 10);
+RationalNumberArray* rnaCreate(int size = 10);
 
 void rnaDelete(RationalNumberArray *data);
 
@@ -21,12 +26,12 @@ void rnaAdd(RationalNumberArray *data, RationalNumber *value);
 
 void rnaSet(RationalNumberArray *data, RationalNumber *value, int position);
 
-RationalNumber rnaGet(RationalNumberArray *data, int position);
+RationalNumber* rnaGet(RationalNumberArray *data, int position);
 
 void rnaRemove(RationalNumberArray *data, int firstPosition, int lastPosition);
 
-ErrType* rnaError();
+ErrType* rnaError(RationalNumberArray *data);
 
-void rnaSetErrorCallback(void (*callbackFunction)(RationalNumberArray*));
+void rnaSetErrorCallback(RationalNumberArray *data, void (*callbackFunction)(RationalNumberArray*));
 
 #endif // RATIONALNUMBERARRAY_H
