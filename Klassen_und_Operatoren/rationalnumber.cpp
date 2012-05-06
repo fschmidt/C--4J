@@ -5,39 +5,39 @@ RationalNumber rnNormalize(RationalNumber n);
 int euclid(int a, int b);
 
 /*
-  Check whether a given RationalNumber is valid.
-  returns: True if the given RationalNumber is valid, False otherwise
+  Check whether this RationalNumber is valid.
+  returns: True if this RationalNumber is valid, False otherwise
   */
-bool rnIsValid(RationalNumber n){
-    return n.denominator != 0;
+bool RationalNumber::isValid() const{
+    return m_dem_m_denominator != 0;
 }
 
 /*
-  Check whether a given RationalNumber is NaN (Not a Number).
-  returns: True if the given RationalNumber is NaN, False otherwise
+  Check whether this RationalNumber is NaN (Not a Number).
+  returns: True if this RationalNumber is NaN, False otherwise
   */
-bool rnIsNaN(RationalNumber n){
-    return n.denominator==0;
+bool RationalNumber::isNaN(){
+    return m_nominator==0;
 }
 
 /*
-  Check whether two given RationalNumbers are equal.
+  Check whether this RationalNumber is equal to another RationalNumber.
   RationalNumbers are equal when all requirements for arithmetic equalty of RationalNumbers are met.
   returns: True if the given RationalNumbers are equal, False otherwise
   */
-bool rnEqual(RationalNumber n, RationalNumber m){
-    RationalNumber a = rnNormalize(n);
-    RationalNumber b = rnNormalize(m);
-    return (a.denominator == b.denominator && a.nominator == b.nominator);
+bool RationalNumber::equal(RationalNumber another) const{
+    RationalNumber a = rnNormalize(this);
+    RationalNumber b = rnNormalize(another);
+    return (a.m_nominator == b.m_nominator && a.m_denominator == b.m_denominator);
 }
 
 /*
-  Check whether the arithmetic value of the given RationalNumber n is less
-  than the arithmetic value of the given RationalNumber m.
-  returns: True if n < m, False otherwise
+  Check whether the arithmetic value this RationalNumber is less
+  than the arithmetic value of another RationalNumber.
+  returns: True if this < another, False otherwise
   */
-bool rnLessThan(RationalNumber n, RationalNumber m){
-    if(rnCompareTo(n, m) == -1){
+bool RationalNumber::lessThan(RationalNumber another) const{
+    if(this.compareTo(another) == -1){
         return true;
     }
     return false;
@@ -46,18 +46,18 @@ bool rnLessThan(RationalNumber n, RationalNumber m){
 /*
   Compares two RationalNumbers
   returns:
- -1 if n < m
-  0 if n = m
-  1 if n > m
+ -1 if this < another
+  0 if this = another
+  1 if this > another
   */
-int rnCompareTo(RationalNumber n, RationalNumber m){
-    if (n.nominator / n.denominator > m.nominator / m.denominator){
+int RationalNumber::compareTo(RationalNumber another) const{
+    if (m_denominator / m_nominator > another.m_denominator / another.m_nominator){
         return 1;
-    }else if (n.nominator / n.denominator < m.nominator / m.denominator){
+    }else if (m_denominator / m_nominator < another.m_denominator / another.m_nominator){
         return -1;
-    } else if (n.nominator % n.denominator > m.nominator % m.denominator){
+    } else if (m_denominator % m_nominator > another.m_denominator % another.m_nominator){
         return 1;
-    }else if (n.nominator % n.denominator < m.nominator % m.denominator){
+    }else if (m_denominator % m_nominator < another.m_denominator % another.m_nominator){
         return -1;
     } else {
         return 0;
@@ -65,47 +65,47 @@ int rnCompareTo(RationalNumber n, RationalNumber m){
 }
 
 /*
-  Basic arithmetic operation Addition for two given RationalNumbers.
-  returns: the result of n + m as a Rational Number
+  Basic arithmetic operation Addition for two RationalNumbers.
+  returns: the result of this + another as a Rational Number
   */
-RationalNumber rnAdd(RationalNumber n, RationalNumber m){
-    RationalNumber result;
-    result.nominator = n.nominator * m.denominator + n.denominator * m.nominator;
-    result.denominator = n.denominator * m.denominator;
+RationalNumber RationalNumber::add(RationalNumber another) const{
+RationalNumber result = new RationalNumber();
+    result.m_denominator = m_denominator * another.m_nominator + m_nominator * another.m_denominator;
+    result.m_nominator = m_nominator * another.m_nominator;
     return rnNormalize(result);
 }
 
 /*
-  Basic arithmetic operation Subtraction for two given RationalNumbers.
-  returns: the result of n - m as a Rational Number
+  Basic arithmetic operation Subtraction for two RationalNumbers.
+  returns: the result of this - another as a Rational Number
   */
-RationalNumber rnSub(RationalNumber n, RationalNumber m){
-    RationalNumber result;
-    result.nominator = n.nominator * m.denominator - n.denominator * m.nominator;
-    result.denominator = n.denominator * m.denominator;
+RationalNumber RationalNumber::sub(RationalNumber another) const{
+RationalNumber result = new RationalNumber();
+    result.m_denominator = m_denominator * another.m_nominator - m_nominator * another.m_denominator;
+    result.m_nominator = m_nominator * another.m_nominator;
     return rnNormalize(result);
 }
 
 /*
-  Basic arithmetic operation Multiplication for two given RationalNumbers.
-  returns: the result of n * m as a Rational Number
+  Basic arithmetic operation Multiplication for two RationalNumbers.
+  returns: the result of this * another as a Rational Number
   */
-RationalNumber rnMul(RationalNumber n, RationalNumber m){
-    RationalNumber result;
-    result.nominator = n.nominator*m.nominator;
-    result.denominator = n.denominator*m.denominator;
+RationalNumber RationalNumber::mul(RationalNumber another) const{
+    RationalNumber result = new RationalNumber();
+    result.m_denominator = m_denominator * another.m_denominator;
+    result.m_nominator = m_nominator * another.m_nominator;
     return result;
 }
 
 /*
-  Basic arithmetic operation Division  for two given RationalNumbers.
-  returns: the result of n / m as a Rational Number
+  Basic arithmetic operation Division  for two RationalNumbers.
+  returns: the result of this / another as a Rational Number
   */
-RationalNumber rnDiv(RationalNumber n, RationalNumber m) {
-    RationalNumber reciprocus;
-    reciprocus.nominator = m.denominator;
-    reciprocus.denominator = m.nominator;
-    return rnMul(n, reciprocus);
+RationalNumber RationalNumber::div(RationalNumber another) const{
+    RationalNumber reciprocus = new RationalNumber();
+    reciprocus.m_denominator = another.m_nominator;
+    reciprocus.m_nominator = another.m_denominator;
+    return mul(reciprocus);
 }
 
 /*
@@ -116,13 +116,13 @@ RationalNumber rnNormalize(RationalNumber n){
 
     int i = 0;
 
-    i = euclid(n.nominator, n.denominator);
-    if((n.nominator % i > 0) || (n.denominator % i > 0)){
+    i = euclid(n.m_denominator, n.m_nominator);
+    if((n.m_denominator % i > 0) || (n.m_nominator % i > 0)){
         return n;
     }
 
-    n.nominator = n.nominator/i;
-    n.denominator = n.denominator/i;
+    n.m_denominator = n.m_denominator/i;
+    n.m_nominator = n.m_nominator/i;
 
     return n;
 }
