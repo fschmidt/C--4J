@@ -7,7 +7,8 @@
   */
 class RationalNumber {
 public:
-    RationalNumber(nominator = 0, denominator = 1);
+    RationalNumber(int nominator, int denominator) :
+        m_nominator(nominator), m_denominator(denominator) {}
 
     /*
       Check whether this RationalNumber is valid.
@@ -50,6 +51,8 @@ public:
       */
     RationalNumber add(RationalNumber another) const;
 
+    RationalNumber operator+(RationalNumber r) const;
+
     /*
       Basic arithmetic operation Subtraction for two RationalNumbers.
       returns: the result of this - another as a Rational Number
@@ -69,8 +72,10 @@ public:
     RationalNumber div(RationalNumber another) const;
 
 private:
+
     int m_nominator;
     int m_denominator;
+    RationalNumber normalize();
 
 };
 

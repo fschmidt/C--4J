@@ -1,7 +1,5 @@
 #include "rationalnumber.h"
 
-RationalNumber rnNormalize(RationalNumber n);
-
 int euclid(int a, int b);
 
 /*
@@ -9,7 +7,7 @@ int euclid(int a, int b);
   returns: True if this RationalNumber is valid, False otherwise
   */
 bool RationalNumber::isValid() const{
-    return m_dem_m_denominator != 0;
+    return m_denominator != 0;
 }
 
 /*
@@ -25,9 +23,9 @@ bool RationalNumber::isNaN(){
   RationalNumbers are equal when all requirements for arithmetic equalty of RationalNumbers are met.
   returns: True if the given RationalNumbers are equal, False otherwise
   */
-bool RationalNumber::equal(RationalNumber another) const{
-    RationalNumber a = rnNormalize(this);
-    RationalNumber b = rnNormalize(another);
+bool RationalNumber::equal(RationalNumber another) const {
+    RationalNumber a = this->normalize();
+    RationalNumber b = another.normalize();
     return (a.m_nominator == b.m_nominator && a.m_denominator == b.m_denominator);
 }
 
@@ -37,7 +35,7 @@ bool RationalNumber::equal(RationalNumber another) const{
   returns: True if this < another, False otherwise
   */
 bool RationalNumber::lessThan(RationalNumber another) const{
-    if(this.compareTo(another) == -1){
+    if(compareTo(another) == -1){
         return true;
     }
     return false;
@@ -69,10 +67,17 @@ int RationalNumber::compareTo(RationalNumber another) const{
   returns: the result of this + another as a Rational Number
   */
 RationalNumber RationalNumber::add(RationalNumber another) const{
-RationalNumber result = new RationalNumber();
-    result.m_denominator = m_denominator * another.m_nominator + m_nominator * another.m_denominator;
-    result.m_nominator = m_nominator * another.m_nominator;
-    return rnNormalize(result);
+    int nominator = m_nominator * another.m_nominator;
+    int denominator = m_denominator * another.m_nominator + m_nominator * another.m_denominator;
+    RationalNumber result(nominator, denominator);
+    return normalize(result);
+}
+
+RationalNumber RationalNumber::operator+(RationalNumber r) const {
+    int nominator = m_nominator * r.m_nominator;
+    int denominator = m_denominator * r.m_nominator + m_nominator * r.m_denominator;
+    RationalNumber result(nominator, denominator);
+    return normalize(result);
 }
 
 /*
@@ -80,10 +85,10 @@ RationalNumber result = new RationalNumber();
   returns: the result of this - another as a Rational Number
   */
 RationalNumber RationalNumber::sub(RationalNumber another) const{
-RationalNumber result = new RationalNumber();
-    result.m_denominator = m_denominator * another.m_nominator - m_nominator * another.m_denominator;
-    result.m_nominator = m_nominator * another.m_nominator;
-    return rnNormalize(result);
+    int nominator = m_nominator * another.m_nominator;
+    int denominator = m_denominator * another.m_nominator - m_nominator * another.m_denominator;
+    RationalNumber result(nominator, denominator);
+    return normalize(result);
 }
 
 /*
@@ -91,9 +96,9 @@ RationalNumber result = new RationalNumber();
   returns: the result of this * another as a Rational Number
   */
 RationalNumber RationalNumber::mul(RationalNumber another) const{
-    RationalNumber result = new RationalNumber();
-    result.m_denominator = m_denominator * another.m_denominator;
-    result.m_nominator = m_nominator * another.m_nominator;
+    int nominator = m_nominator * another.m_nominator;
+    int denominator = m_denominator * another.m_denominator;
+    RationalNumber result(nominator, denominator);
     return result;
 }
 
@@ -102,9 +107,7 @@ RationalNumber RationalNumber::mul(RationalNumber another) const{
   returns: the result of this / another as a Rational Number
   */
 RationalNumber RationalNumber::div(RationalNumber another) const{
-    RationalNumber reciprocus = new RationalNumber();
-    reciprocus.m_denominator = another.m_nominator;
-    reciprocus.m_nominator = another.m_denominator;
+    RationalNumber reciprocus (another.m_denominator, another.m_nominator);
     return mul(reciprocus);
 }
 
@@ -112,19 +115,22 @@ RationalNumber RationalNumber::div(RationalNumber another) const{
   Normalizes a RationalNumber
   returns: The normalized RationalNumber
   */
-RationalNumber rnNormalize(RationalNumber n){
+RationalNumber RationalNumber::normalize(){
 
     int i = 0;
 
-    i = euclid(n.m_denominator, n.m_nominator);
-    if((n.m_denominator % i > 0) || (n.m_nominator % i > 0)){
-        return n;
+    RationalNumber result(m_nominator, m_denominator);
+
+    i = euclid(result.m_denominator, result.m_nominator);
+
+    if((result.m_denominator % i > 0) || (result.m_nominator % i > 0)){
+        return result;
     }
 
-    n.m_denominator = n.m_denominator/i;
-    n.m_nominator = n.m_nominator/i;
+    result.m_denominator = result.m_denominator/i;
+    result.m_nominator = result.m_nominator/i;
 
-    return n;
+    return result;
 }
 
 int euclid(int a, int b){
