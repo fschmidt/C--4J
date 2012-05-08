@@ -1,6 +1,7 @@
 #ifndef RATIONALNUMBER_H
 #define RATIONALNUMBER_H
 
+#include <iostream>
 
 /*
   Struct representing a Rational Number.
@@ -9,6 +10,11 @@ class RationalNumber {
 public:
     RationalNumber(int nominator, int denominator) :
         m_nominator(nominator), m_denominator(denominator) {}
+
+    int nominator();
+    int nominator() const;
+    int denominator();
+    int denominator() const;
 
     /*
       Check whether this RationalNumber is valid.
@@ -59,11 +65,15 @@ public:
       */
     RationalNumber sub(RationalNumber another) const;
 
+    RationalNumber operator-(RationalNumber r) const;
+
     /*
       Basic arithmetic operation Multiplication for two RationalNumbers.
       returns: the result of this * another as a Rational Number
       */
     RationalNumber mul(RationalNumber another) const;
+
+    RationalNumber operator*(RationalNumber r) const;
 
     /*
       Basic arithmetic operation Division  for two RationalNumbers.
@@ -71,13 +81,17 @@ public:
       */
     RationalNumber div(RationalNumber another) const;
 
+    RationalNumber operator/(RationalNumber r) const;
+
 private:
 
     int m_nominator;
     int m_denominator;
-    RationalNumber normalize();
+    RationalNumber normalize() const;
 
 };
+
+std::ostream& operator<< (std::ostream &lhs, const RationalNumber &rhs);
 
 #endif // RATIONALNUMBER_H
 

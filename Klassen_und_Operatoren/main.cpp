@@ -4,12 +4,14 @@
 
 #include <stdio.h>
 #include <assert.h>
-
+#include <iostream>
 #include "rationalnumber.h"
-#include "RationalNumberArray.h"
+//#include "RationalNumberArray.h"
 
-void testRationalNumberArray();
-void myTestCallbackFunction(RationalNumberArray *data);
+//void testRationalNumberArray();
+//void myTestCallbackFunction(RationalNumberArray *data);
+
+using namespace std;
 
 int main() {
 
@@ -32,6 +34,7 @@ int main() {
 
     assert( rn6_4.equal(rn3_2) );
     assert( rn3_4.add(rn3_4).equal(rn6_4) );
+    assert( (rn3_4 + rn3_4).equal(rn6_4) );
     assert( !rnm9_m6.equal(rn9_m6) );
     assert( rn9_m6.lessThan(rn3_2) );
 
@@ -46,7 +49,7 @@ int main() {
 
     printf("RN successful!\n");
 
-    testRationalNumberArray();
+    //testRationalNumberArray();
 
     return 0;
 }

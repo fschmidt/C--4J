@@ -15,7 +15,7 @@ bool RationalNumber::isValid() const{
   returns: True if this RationalNumber is NaN, False otherwise
   */
 bool RationalNumber::isNaN(){
-    return m_nominator==0;
+    return m_denominator==0;
 }
 
 /*
@@ -67,17 +67,14 @@ int RationalNumber::compareTo(RationalNumber another) const{
   returns: the result of this + another as a Rational Number
   */
 RationalNumber RationalNumber::add(RationalNumber another) const{
-    int nominator = m_nominator * another.m_nominator;
-    int denominator = m_denominator * another.m_nominator + m_nominator * another.m_denominator;
+    int nominator = m_denominator * another.m_nominator + m_nominator * another.m_denominator;
+    int denominator = m_denominator * another.m_denominator;
     RationalNumber result(nominator, denominator);
-    return normalize(result);
+    return result.normalize();
 }
 
-RationalNumber RationalNumber::operator+(RationalNumber r) const {
-    int nominator = m_nominator * r.m_nominator;
-    int denominator = m_denominator * r.m_nominator + m_nominator * r.m_denominator;
-    RationalNumber result(nominator, denominator);
-    return normalize(result);
+RationalNumber RationalNumber::operator+(RationalNumber another) const {
+    return this->add(another);
 }
 
 /*
@@ -88,7 +85,11 @@ RationalNumber RationalNumber::sub(RationalNumber another) const{
     int nominator = m_nominator * another.m_nominator;
     int denominator = m_denominator * another.m_nominator - m_nominator * another.m_denominator;
     RationalNumber result(nominator, denominator);
-    return normalize(result);
+    return result.normalize();
+}
+
+RationalNumber RationalNumber::operator-(RationalNumber another) const {
+    return this->sub(another);
 }
 
 /*
@@ -102,6 +103,10 @@ RationalNumber RationalNumber::mul(RationalNumber another) const{
     return result;
 }
 
+RationalNumber RationalNumber::operator*(RationalNumber another) const {
+    return this->mul(another);
+}
+
 /*
   Basic arithmetic operation Division  for two RationalNumbers.
   returns: the result of this / another as a Rational Number
@@ -111,11 +116,26 @@ RationalNumber RationalNumber::div(RationalNumber another) const{
     return mul(reciprocus);
 }
 
+RationalNumber RationalNumber::operator/(RationalNumber another) const {
+    return this->div(another);
+}
+
+std::ostream& operator<< (std::ostream &lhs, const RationalNumber &rhs) {
+    lhs << "RationalNumber: (" << rhs.nominator() << ", " << rhs.denominator() << ")";
+    return lhs;
+}
+
+int RationalNumber::nominator() { return m_nominator; }
+int RationalNumber::nominator() const { return m_nominator; }
+int RationalNumber::denominator() { return m_denominator; }
+int RationalNumber::denominator() const { return m_denominator; }
+
+
 /*
   Normalizes a RationalNumber
   returns: The normalized RationalNumber
   */
-RationalNumber RationalNumber::normalize(){
+RationalNumber RationalNumber::normalize() const{
 
     int i = 0;
 
