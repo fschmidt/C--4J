@@ -33,14 +33,24 @@ public:
       RationalNumbers are equal when all requirements for arithmetic equalty of RationalNumbers are met.
       returns: True if the given RationalNumbers are equal, False otherwise
       */
-    bool equal(RationalNumber another) const;
+    bool equal(const RationalNumber &another) const;
+
+    bool operator ==(const RationalNumber &another) const;
 
     /*
       Check whether the arithmetic value this RationalNumber is less
       than the arithmetic value of another RationalNumber.
       returns: True if this < another, False otherwise
       */
-    bool lessThan(RationalNumber another) const;
+    bool lessThan(const RationalNumber &another) const;
+
+    bool operator <(const RationalNumber &another) const;
+
+    bool operator <=(const RationalNumber &another) const;
+
+    bool operator >=(const RationalNumber &another) const;
+
+    bool operator >(const RationalNumber &another) const;
 
     /*
       Compares two RationalNumbers
@@ -49,39 +59,39 @@ public:
       0 if this = another
       1 if this > another
       */
-    int compareTo(RationalNumber another) const;
+    int compareTo(const RationalNumber &another) const;
 
     /*
       Basic arithmetic operation Addition for two RationalNumbers.
       returns: the result of this + another as a Rational Number
       */
-    RationalNumber add(RationalNumber another) const;
+    RationalNumber add(const RationalNumber &another) const;
 
-    RationalNumber operator+(RationalNumber r) const;
+    RationalNumber operator+(const RationalNumber &r) const;
 
     /*
       Basic arithmetic operation Subtraction for two RationalNumbers.
       returns: the result of this - another as a Rational Number
       */
-    RationalNumber sub(RationalNumber another) const;
+    RationalNumber sub(const RationalNumber &another) const;
 
-    RationalNumber operator-(RationalNumber r) const;
+    RationalNumber operator-(const RationalNumber &r) const;
 
     /*
       Basic arithmetic operation Multiplication for two RationalNumbers.
       returns: the result of this * another as a Rational Number
       */
-    RationalNumber mul(RationalNumber another) const;
+    RationalNumber mul(const RationalNumber &another) const;
 
-    RationalNumber operator*(RationalNumber r) const;
+    RationalNumber operator*(const RationalNumber &r) const;
 
     /*
       Basic arithmetic operation Division  for two RationalNumbers.
       returns: the result of this / another as a Rational Number
       */
-    RationalNumber div(RationalNumber another) const;
+    RationalNumber div(const RationalNumber &another) const;
 
-    RationalNumber operator/(RationalNumber r) const;
+    RationalNumber operator/(const RationalNumber &r) const;
 
 private:
 

@@ -23,10 +23,14 @@ bool RationalNumber::isNaN(){
   RationalNumbers are equal when all requirements for arithmetic equalty of RationalNumbers are met.
   returns: True if the given RationalNumbers are equal, False otherwise
   */
-bool RationalNumber::equal(RationalNumber another) const {
+bool RationalNumber::equal(const RationalNumber &another) const {
     RationalNumber a = this->normalize();
     RationalNumber b = another.normalize();
     return (a.m_nominator == b.m_nominator && a.m_denominator == b.m_denominator);
+}
+
+bool RationalNumber::operator ==(const RationalNumber &another) const {
+    return this->equal(another);
 }
 
 /*
@@ -34,11 +38,27 @@ bool RationalNumber::equal(RationalNumber another) const {
   than the arithmetic value of another RationalNumber.
   returns: True if this < another, False otherwise
   */
-bool RationalNumber::lessThan(RationalNumber another) const{
+bool RationalNumber::lessThan(const RationalNumber &another) const{
     if(compareTo(another) == -1){
         return true;
     }
     return false;
+}
+
+bool RationalNumber::operator <(const RationalNumber &another) const {
+    return this->lessThan(another);
+}
+
+bool RationalNumber::operator <=(const RationalNumber &another) const {
+    return this->lessThan(another) || this->equal(another);
+}
+
+bool RationalNumber::operator >=(const RationalNumber &another) const {
+    return another.lessThan(*this) || this->equal(another);
+}
+
+bool RationalNumber::operator >(const RationalNumber &another) const {
+    return another.lessThan(*this);
 }
 
 /*
@@ -48,7 +68,7 @@ bool RationalNumber::lessThan(RationalNumber another) const{
   0 if this = another
   1 if this > another
   */
-int RationalNumber::compareTo(RationalNumber another) const{
+int RationalNumber::compareTo(const RationalNumber &another) const{
     if (m_denominator / m_nominator > another.m_denominator / another.m_nominator){
         return 1;
     }else if (m_denominator / m_nominator < another.m_denominator / another.m_nominator){
@@ -66,14 +86,14 @@ int RationalNumber::compareTo(RationalNumber another) const{
   Basic arithmetic operation Addition for two RationalNumbers.
   returns: the result of this + another as a Rational Number
   */
-RationalNumber RationalNumber::add(RationalNumber another) const{
+RationalNumber RationalNumber::add(const RationalNumber &another) const{
     int nominator = m_denominator * another.m_nominator + m_nominator * another.m_denominator;
     int denominator = m_denominator * another.m_denominator;
     RationalNumber result(nominator, denominator);
     return result.normalize();
 }
 
-RationalNumber RationalNumber::operator+(RationalNumber another) const {
+RationalNumber RationalNumber::operator+(const RationalNumber &another) const {
     return this->add(another);
 }
 
@@ -81,14 +101,14 @@ RationalNumber RationalNumber::operator+(RationalNumber another) const {
   Basic arithmetic operation Subtraction for two RationalNumbers.
   returns: the result of this - another as a Rational Number
   */
-RationalNumber RationalNumber::sub(RationalNumber another) const{
+RationalNumber RationalNumber::sub(const RationalNumber &another) const{
     int nominator = m_nominator * another.m_nominator;
     int denominator = m_denominator * another.m_nominator - m_nominator * another.m_denominator;
     RationalNumber result(nominator, denominator);
     return result.normalize();
 }
 
-RationalNumber RationalNumber::operator-(RationalNumber another) const {
+RationalNumber RationalNumber::operator-(const RationalNumber &another) const {
     return this->sub(another);
 }
 
@@ -96,14 +116,14 @@ RationalNumber RationalNumber::operator-(RationalNumber another) const {
   Basic arithmetic operation Multiplication for two RationalNumbers.
   returns: the result of this * another as a Rational Number
   */
-RationalNumber RationalNumber::mul(RationalNumber another) const{
+RationalNumber RationalNumber::mul(const RationalNumber &another) const{
     int nominator = m_nominator * another.m_nominator;
     int denominator = m_denominator * another.m_denominator;
     RationalNumber result(nominator, denominator);
     return result;
 }
 
-RationalNumber RationalNumber::operator*(RationalNumber another) const {
+RationalNumber RationalNumber::operator*(const RationalNumber &another) const {
     return this->mul(another);
 }
 
@@ -111,12 +131,12 @@ RationalNumber RationalNumber::operator*(RationalNumber another) const {
   Basic arithmetic operation Division  for two RationalNumbers.
   returns: the result of this / another as a Rational Number
   */
-RationalNumber RationalNumber::div(RationalNumber another) const{
+RationalNumber RationalNumber::div(const RationalNumber &another) const{
     RationalNumber reciprocus (another.m_denominator, another.m_nominator);
     return mul(reciprocus);
 }
 
-RationalNumber RationalNumber::operator/(RationalNumber another) const {
+RationalNumber RationalNumber::operator/(const RationalNumber &another) const {
     return this->div(another);
 }
 

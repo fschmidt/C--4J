@@ -37,6 +37,11 @@ int main() {
     assert( (rn3_4 + rn3_4).equal(rn6_4) );
     assert( !rnm9_m6.equal(rn9_m6) );
     assert( rn9_m6.lessThan(rn3_2) );
+    RationalNumber mrn = rn3_4.add(rn3_4.mul(rn3_2));
+    RationalNumber res = rn3_4 + rn3_4 * rn3_2 ;
+    cout << "\n" << res << "\n";
+    assert( res.nominator()==15 && res.denominator() == 8 );
+
 
     RationalNumber t1 = rn3_4.add(rn6_4);
     RationalNumber t2 = rn3_2.div(rn3_2);
