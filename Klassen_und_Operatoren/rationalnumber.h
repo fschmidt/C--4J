@@ -3,12 +3,14 @@
 
 #include <iostream>
 
+using namespace std;
+
 /*
   Struct representing a Rational Number.
   */
 class RationalNumber {
 public:
-    RationalNumber(int nominator, int denominator) :
+    RationalNumber(int nominator = 0, int denominator = 1) :
         m_nominator(nominator), m_denominator(denominator) {}
 
     int nominator();

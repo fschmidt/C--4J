@@ -4,9 +4,9 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     rationalnumber.cpp \
-    RationalNumberArray.cpp
+    rationalnumberarray.cpp
 
 HEADERS += \
     rationalnumber.h \
-    RationalNumberArray.h
+    rationalnumberarray.h
 
