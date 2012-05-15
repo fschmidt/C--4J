@@ -19,7 +19,7 @@ public:
       The constructor for RationalNumberArrays
       returns: An empty (size=0) RationalNumberArray of the given capacity.
     */
-    RationalNumberArray(const int capacity = 10, void (* const callbackFunction)( const RationalNumberArray*) = 0);
+    RationalNumberArray(const int capacity = 10, void (* const callbackFunction)(const RationalNumberArray&) = 0);
 
     RationalNumberArray(RationalNumberArray const &another);
 
@@ -45,7 +45,7 @@ public:
 
     ErrType error();
 
-    void setErrorCallback(void (*callbackFunction)(const RationalNumberArray*));
+    void setErrorCallback(void (*callbackFunction)(const RationalNumberArray&));
 
 private:
     RationalNumber *m_values;
@@ -53,9 +53,19 @@ private:
     int m_capacity;
     ErrType m_lastError;
 
-    void (*m_callbackFunction)( const RationalNumberArray*);
+    void (*m_callbackFunction)( const RationalNumberArray&);
 
-    bool operator==(RationalNumberArray* another);
+    bool operator==(const RationalNumberArray& another);
+
+    bool operator!=(const RationalNumberArray& another);
+
+    bool operator>=(const RationalNumberArray& another);
+
+    bool operator<=(const RationalNumberArray& another);
+
+    bool operator>(const RationalNumberArray& another);
+
+    bool operator<(const RationalNumberArray& another);
 };
 
 }

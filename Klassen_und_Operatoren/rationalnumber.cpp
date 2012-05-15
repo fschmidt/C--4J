@@ -194,7 +194,15 @@ rnum::RationalNumber operator +(const int l, const rnum::RationalNumber &r){
     return RationalNumber(l) + r;
 }
 
+rnum::RationalNumber operator +(const double l, const rnum::RationalNumber &r){
+    return RationalNumber(l) + r;
+}
+
 rnum::RationalNumber operator -(const int l, const rnum::RationalNumber &r){
+    return RationalNumber(l) - r;
+}
+
+rnum::RationalNumber operator -(const double l, const rnum::RationalNumber &r){
     return RationalNumber(l) - r;
 }
 
@@ -202,8 +210,21 @@ rnum::RationalNumber operator *(const int l, const rnum::RationalNumber &r){
     return RationalNumber(l) * r;
 }
 
+rnum::RationalNumber operator *(const double l, const rnum::RationalNumber &r){
+    return RationalNumber(l) * r;
+}
+
 rnum::RationalNumber operator /(const int l, const rnum::RationalNumber &r){
     return RationalNumber(l) / r;
+}
+
+rnum::RationalNumber operator /(const double l, const rnum::RationalNumber &r){
+    return RationalNumber(l) / r;
+}
+
+
+double RationalNumber::doubleValue() const {
+    return (double)m_nominator / (double)m_denominator;
 }
 
 int RationalNumber::nominator() { return m_nominator; }

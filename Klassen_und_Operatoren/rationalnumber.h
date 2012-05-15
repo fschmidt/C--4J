@@ -107,6 +107,8 @@ public:
 
     RationalNumber operator/=(const RationalNumber &r);
 
+    double doubleValue() const;
+
 private:
 
     int m_nominator;
@@ -119,6 +121,11 @@ rnum::RationalNumber operator +(const int l, const rnum::RationalNumber &r);
 rnum::RationalNumber operator -(const int l, const rnum::RationalNumber &r);
 rnum::RationalNumber operator *(const int l, const rnum::RationalNumber &r);
 rnum::RationalNumber operator /(const int l, const rnum::RationalNumber &r);
+
+rnum::RationalNumber operator +(const double l, const rnum::RationalNumber &r);
+rnum::RationalNumber operator -(const double l, const rnum::RationalNumber &r);
+rnum::RationalNumber operator *(const double l, const rnum::RationalNumber &r);
+rnum::RationalNumber operator /(const double l, const rnum::RationalNumber &r);
 
 
 std::ostream& operator<< (std::ostream &lhs, const rnum::RationalNumber &rhs);

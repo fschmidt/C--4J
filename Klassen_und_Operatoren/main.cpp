@@ -64,11 +64,37 @@ int main() {
 
     // test rn und int
     RationalNumber rn7_1(7,1);
-    RationalNumber rn2_1(2,1);
+
     assert((7 + rn3_4) == (rn7_1 + rn3_4));
     assert((rn3_4 + 7) == (rn7_1 + rn3_4));
-    assert(RationalNumber(1.5) == rn3_2);
 
+    assert((7 - rn3_4) == (rn7_1 - rn3_4));
+    assert((rn3_4 - 7) == (rn3_4 - rn7_1));
+
+    assert((7 * rn3_4) == (rn7_1 * rn3_4));
+    assert((rn3_4 * 7) == (rn7_1 * rn3_4));
+
+    assert((7 / rn3_4) == (rn7_1 / rn3_4));
+    assert((rn3_4 / 7) == (rn3_4 / rn7_1));
+
+    // test rn und int
+
+    double myDouble = 1.5;
+
+    assert(RationalNumber(myDouble) == rn3_2);
+    assert(myDouble == rn3_2.doubleValue());
+
+    assert((myDouble + rn3_4) == (rn3_2 + rn3_4));
+    assert((rn3_4 + myDouble) == (rn3_2 + rn3_4));
+
+    assert((myDouble - rn3_4) == (rn3_2 - rn3_4));
+    assert((rn3_4 - myDouble) == (rn3_4 - rn3_2));
+
+    assert((myDouble * rn3_4) == (rn3_2 * rn3_4));
+    assert((rn3_4 * myDouble) == (rn3_2 * rn3_4));
+
+    assert((myDouble / rn3_4) == (rn3_2 / rn3_4));
+    assert((rn3_4 / myDouble) == (rn3_4 / rn3_2));
 
     cout << "RN successful!\n";
 
