@@ -1,14 +1,15 @@
 #include <stdlib.h>
 #include "rationalnumberarray.h"
 
+using namespace rnum;
 
-void defaultCallbackFunction(RationalNumberArray* rna);
+void defaultCallbackFunction(const RationalNumberArray* rna);
 
 /*
   The constructor for RationalNumberArrays
   returns: An empty (size=0) RationalNumberArray of the given capacity.
 */
-RationalNumberArray::RationalNumberArray(const int capacity, void (* const callbackFunction)(RationalNumberArray*))
+RationalNumberArray::RationalNumberArray(const int capacity, void (* const callbackFunction)(const RationalNumberArray*))
     :m_size(0), m_capacity(capacity), m_callbackFunction(callbackFunction)
 {
     if(m_callbackFunction == 0) {
@@ -23,6 +24,27 @@ RationalNumberArray::RationalNumberArray(const int capacity, void (* const callb
     }
 }
 
+RationalNumberArray::RationalNumberArray(RationalNumberArray const &another){
+    m_capacity =another.m_capacity;
+    m_size = another.m_size;
+    m_callbackFunction = another.m_callbackFunction;
+    m_lastError = another.m_lastError;
+
+    RationalNumber* temp = new (nothrow) RationalNumber[another.m_capacity];
+
+    if(temp == 0){
+        m_lastError = CANNOT_ALLOCATE_MEMORY;
+        m_callbackFunction(this);
+        return;
+    }
+
+    m_values = temp;
+
+    for(int i = 0; i < m_size; i++) {
+        m_values[i] = another.m_values[i];
+    }
+}
+
 RationalNumberArray::~RationalNumberArray() {
     delete[] m_values;
 }
@@ -30,15 +52,21 @@ RationalNumberArray::~RationalNumberArray() {
 /*
       Sets the capacity of the given RationalNumberArray
     */
-void RationalNumberArray::resize(const int newCapacity){
+void RationalNumberArray::resize(const int newCapacity) {
 
-    RationalNumber *temp = m_values;
-    realloc(m_values, sizeof(RationalNumber) * newCapacity);
-    // check whether memory was allocated
-    if(m_values == 0){
-        // if reallocation fails free the old space to avoid mem leak
-        free(temp);
+    if(newCapacity < 0) {
+        m_lastError = NEGATIVE_CAPAZITY;
         m_callbackFunction(this);
+        return;
+    }
+
+    RationalNumber *temp = new (nothrow) RationalNumber[newCapacity];
+
+    // check whether memory was allocated
+    if(temp == 0){
+        m_lastError = CANNOT_ALLOCATE_MEMORY;
+        m_callbackFunction(this);
+        return;
     }
 
     m_capacity = newCapacity;
@@ -46,6 +74,12 @@ void RationalNumberArray::resize(const int newCapacity){
     if(m_size > m_capacity){
         m_size = m_capacity;
     }
+
+    for(int i = 0; i < m_size; i++) {
+        temp[i] = m_values[i];
+    }
+    delete[] m_values;
+    m_values = temp;
 }
 
 /*
@@ -93,16 +127,20 @@ void RationalNumberArray::set(RationalNumber const &value, const int position){
     m_values[position] = value;
 }
 
-/*
-  returns: the element of the given RationalNumberArray at the given position
-    */
-RationalNumber RationalNumberArray::get(const int position){
-    if(position >= m_size) {
-        //data->lastError = INVALID_INDEX;
+RationalNumber& RationalNumberArray::operator[](int i) {
+    if(i >= m_size) {
+        m_lastError = INVALID_INDEX;
         m_callbackFunction(this);
-        return 0;
     }
-    return m_values[position];
+    return m_values[i];
+}
+
+const RationalNumber& RationalNumberArray::operator[](int i) const {
+    if(i >= m_size) {
+//    error() = INVALID_INDEX;
+        m_callbackFunction(this);
+    }
+    return m_values[i];
 }
 
 /*
@@ -121,19 +159,23 @@ void RationalNumberArray::remove(const int firstPosition, const int lastPosition
 /*
       returns: the errorType thrown by the last function call if an error occured during call.
     */
-RationalNumberArray::ErrType RationalNumberArray::error(){
+RationalNumberArray::ErrType RationalNumberArray::error() const {
+    return m_lastError;
+}
+
+RationalNumberArray::ErrType RationalNumberArray::error() {
     return m_lastError;
 }
 
 /*
       Sets the callback function called when an error is thrown by rna methods other than this.
       */
-void RationalNumberArray::setErrorCallback(void (*callbackFunction)(RationalNumberArray*)){
+void RationalNumberArray::setErrorCallback(void (*callbackFunction)( const RationalNumberArray*)){
     m_callbackFunction = callbackFunction;
 }
 
-void defaultCallbackFunction(RationalNumberArray * rna){
-    cout << "ErrorCode: "<< rna->error();
+void defaultCallbackFunction(const RationalNumberArray * rna){
+    cout << "ErrorCode: "<< rna->error() << "\n";
 }
 
 

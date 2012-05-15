@@ -2,6 +2,18 @@
 
 int euclid(int a, int b);
 
+using namespace rnum;
+
+
+RationalNumber::RationalNumber(double n):
+    m_nominator(static_cast<int>(n*1000000.0+0.5)),
+    m_denominator(1000000)
+{
+    RationalNumber tmp = normalize();
+    m_nominator = tmp.m_nominator;
+    m_denominator = tmp.m_denominator;
+}
+
 /*
   Check whether this RationalNumber is valid.
   returns: True if this RationalNumber is valid, False otherwise
@@ -97,6 +109,13 @@ RationalNumber RationalNumber::operator+(const RationalNumber &another) const {
     return this->add(another);
 }
 
+RationalNumber RationalNumber::operator+=(const RationalNumber &r) {
+    RationalNumber tmp = this->add(r);
+    m_nominator = tmp.m_nominator;
+    m_denominator = tmp.m_denominator;
+    return  *this;
+}
+
 /*
   Basic arithmetic operation Subtraction for two RationalNumbers.
   returns: the result of this - another as a Rational Number
@@ -110,6 +129,18 @@ RationalNumber RationalNumber::sub(const RationalNumber &another) const{
 
 RationalNumber RationalNumber::operator-(const RationalNumber &another) const {
     return this->sub(another);
+}
+
+RationalNumber RationalNumber::operator-=(const RationalNumber &r) {
+    RationalNumber tmp = this->sub(r);
+    m_nominator = tmp.m_nominator;
+    m_denominator = tmp.m_denominator;
+    return  *this;
+}
+
+RationalNumber RationalNumber::operator -() const {
+    return RationalNumber(-m_nominator, m_denominator);
+
 }
 
 /*
@@ -127,6 +158,13 @@ RationalNumber RationalNumber::operator*(const RationalNumber &another) const {
     return this->mul(another);
 }
 
+RationalNumber RationalNumber::operator*=(const RationalNumber &r) {
+    RationalNumber tmp = this->mul(r);
+    m_nominator = tmp.m_nominator;
+    m_denominator = tmp.m_denominator;
+    return  *this;
+}
+
 /*
   Basic arithmetic operation Division  for two RationalNumbers.
   returns: the result of this / another as a Rational Number
@@ -140,9 +178,32 @@ RationalNumber RationalNumber::operator/(const RationalNumber &another) const {
     return this->div(another);
 }
 
+RationalNumber RationalNumber::operator/=(const RationalNumber &r) {
+    RationalNumber tmp = this->div(r);
+    m_nominator = tmp.m_nominator;
+    m_denominator = tmp.m_denominator;
+    return  *this;
+}
+
 std::ostream& operator<< (std::ostream &lhs, const RationalNumber &rhs) {
     lhs << "RationalNumber: (" << rhs.nominator() << ", " << rhs.denominator() << ")";
     return lhs;
+}
+
+rnum::RationalNumber operator +(const int l, const rnum::RationalNumber &r){
+    return RationalNumber(l) + r;
+}
+
+rnum::RationalNumber operator -(const int l, const rnum::RationalNumber &r){
+    return RationalNumber(l) - r;
+}
+
+rnum::RationalNumber operator *(const int l, const rnum::RationalNumber &r){
+    return RationalNumber(l) * r;
+}
+
+rnum::RationalNumber operator /(const int l, const rnum::RationalNumber &r){
+    return RationalNumber(l) / r;
 }
 
 int RationalNumber::nominator() { return m_nominator; }

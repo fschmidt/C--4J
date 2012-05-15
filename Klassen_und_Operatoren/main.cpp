@@ -2,21 +2,20 @@
    Simple Unit Test for type RationalNumber
 */
 
-#include <stdio.h>
 #include <assert.h>
 #include <iostream>
 #include "rationalnumber.h"
-//#include "RationalNumberArray.h"
+#include "RationalNumberArray.h"
 
-//void testRationalNumberArray();
+void testRationalNumberArray();
 //void myTestCallbackFunction(RationalNumberArray *data);
 
 using namespace std;
+using namespace rnum;
 
 int main() {
 
-    printf("Performing unit tests for RationalNumber...");
-    fflush(stdout);
+    cout << "Performing unit tests for RationalNumber...\n";
 
     /* Part 1 - RationalNumber data type */
     RationalNumber rn3_4 ( 3, 4 );
@@ -26,21 +25,21 @@ int main() {
     RationalNumber rn9_m6 ( 9, -6 );
     RationalNumber rn9_4 ( 9, 4 );
     RationalNumber rn0_4 ( 0, 4 );
-    RationalNumber nn ( 4, 0 );
+    RationalNumber rn4_0 ( 4, 0);
 
     assert( rn3_4.isValid() );
-    assert( !nn.isValid() );
-    assert( nn.isNaN() );
+    assert( !rn4_0.isValid() );
+    assert( rn4_0.isNaN() );
 
     assert( rn6_4.equal(rn3_2) );
     assert( rn3_4.add(rn3_4).equal(rn6_4) );
     assert( (rn3_4 + rn3_4).equal(rn6_4) );
     assert( !rnm9_m6.equal(rn9_m6) );
     assert( rn9_m6.lessThan(rn3_2) );
-    RationalNumber mrn = rn3_4.add(rn3_4.mul(rn3_2));
-    RationalNumber res = rn3_4 + rn3_4 * rn3_2 ;
-    cout << "\n" << res << "\n";
-    assert( res.nominator()==15 && res.denominator() == 8 );
+
+    RationalNumber erg(15,8);
+
+    assert( rn3_4 + rn3_4 * rn3_2 == erg );
 
 
     RationalNumber t1 = rn3_4.add(rn6_4);
@@ -52,101 +51,89 @@ int main() {
     assert( t2.equal(t3) );
     assert( t4.isNaN() );
 
-    printf("RN successful!\n");
+    // test negating
+    RationalNumber rnm3_4(-3,4);
+    assert(-rn3_4 == rnm3_4);
 
-    //testRationalNumberArray();
+    //test copy
+    assert(rn3_4 == RationalNumber(rn3_4));
+
+    assert(RationalNumber() == RationalNumber(RationalNumber()));
+
+    assert(rn6_4 == (rn3_4 += rn3_4));
+
+    // test rn und int
+    RationalNumber rn7_1(7,1);
+    RationalNumber rn2_1(2,1);
+    assert((7 + rn3_4) == (rn7_1 + rn3_4));
+    assert((rn3_4 + 7) == (rn7_1 + rn3_4));
+    assert(RationalNumber(1.5) == rn3_2);
+
+
+    cout << "RN successful!\n";
+
+    testRationalNumberArray();
 
     return 0;
 }
 
-//void testRationalNumberArray(){
+void testRationalNumberArray(){
 
-//    RationalNumber
-//            n1 = { 3, 4 },
-//            n2 = { 6, 4 },
-//            n3 = { 3, 2 },
-//            n4 = { -9, -6 },
-//            n5 = { 9, -6 },
-//            n6 = { 9, 4 },
-//            n7 = { 0, 4 },
-//            n8 = { 4, 0 };
+    cout << "Performing unit tests for RationalNumberArray...\n";
+    RationalNumber rn3_4 ( 3, 4 );
+    RationalNumber rn6_4 ( 6, 4 );
+    RationalNumber rn3_2 ( 3, 2 );
+    RationalNumber rnm9_m6 ( -9, -6 );
+    RationalNumber rn9_m6 ( 9, -6 );
+    RationalNumber rn9_4 ( 9, 4 );
+    RationalNumber rn0_4 ( 0, 4 );
 
-//    // Create a RationalNumberArray and check size and capazity
-//    RationalNumberArray* myAr = rnaCreate(5);
-//    assert(rnaSize(myAr)==0);
-//    assert(rnaCapacity(myAr)==5);
-
-//    // add some values
-//    rnaAdd(myAr, &n1);
-//    rnaAdd(myAr, &n2);
-//    rnaAdd(myAr, &n3);
-//    rnaAdd(myAr, &n4);
-
-//    // check new size and capacity
-//    assert(rnaSize(myAr)==4);
-//    assert(rnaCapacity(myAr)==5);
-
-//    rnaAdd(myAr, &n5);
-//    rnaAdd(myAr, &n6);
-//    rnaAdd(myAr, &n7);
-
-//    assert(rnaSize(myAr)==7);
-//    assert(rnaCapacity(myAr)==10);
+    RationalNumberArray rna_1(10);
+    RationalNumberArray rna_2(100);
+    RationalNumberArray rna_3(2);
 
 
-//    printf("\nNominator: %d\n\n",(rnaGet(myAr, 0))->nominator);
-//    printf("\nNominator: %d\n\n",(rnaGet(myAr, 5))->nominator);
-//    printf("\nNominator: %d\n\n",(rnaGet(myAr, 6))->nominator);
+    // test different resize versions
+    rna_1.resize(20);
 
-//    // check whether the added values are correct
-//    assert((rnaGet(myAr, 0) -> nominator == n1.nominator) && (rnaGet(myAr, 0) -> denominator == n1.denominator));
-//    assert((rnaGet(myAr, 5) -> nominator == n6.nominator) && (rnaGet(myAr, 5) -> denominator == n6.denominator));
-//    assert((rnaGet(myAr, 6) -> nominator == n7.nominator) && (rnaGet(myAr, 6) -> denominator == n7.denominator));
+    assert(rna_1.capacity() == 20);
 
-//    // ovveride a value
-//    rnaSet(myAr, &n8, 2);
+    rna_2.resize(5);
 
-//    // check the overridden value
-//    assert((rnaGet(myAr, 2) -> nominator == n8.nominator) && (rnaGet(myAr, 2) -> denominator == n8.denominator));
+    assert(rna_2.capacity() == 5);
 
-//    // produce an error
-//    rnaGet(myAr, 9);
+    assert(rna_3.capacity() == 2);
+    rna_3.add(rn3_4);
+    rna_3.add(rn6_4);
+    rna_3.add(rn9_4);
+    assert(rna_3.capacity() > 2);
 
-//    // set an errorCallback
-//    rnaSetErrorCallback(myAr, &myTestCallbackFunction);
+    // test get
+    assert(rna_3[0] == rn3_4);
+    assert(rna_3[1] == rn6_4);
+    assert(rna_3[2] == rn9_4);
 
-//    // produce another error
-//    rnaGet(myAr, 9);
+    // test set
+    rna_3.set(rn9_4, 1);
+    assert(rna_3[1] == rn9_4);
 
-//    // set a value outside of the current capacity
-//    rnaSet(myAr, &n8, 200);
+    rna_3.set(rnm9_m6, 8);
+    assert(rna_3.capacity() > 7 );
+    assert( rna_3.size() == 9 );
+    assert( rna_3[8] == rnm9_m6 );
+    assert(rna_3[7] == RationalNumber());
 
-//    // check the value
-//    assert((rnaGet(myAr, 200) -> nominator == n8.nominator) && (rnaGet(myAr, 200) -> denominator == n8.denominator));
+    rna_1.resize(-1);
 
-//    // check the new size
-//    printf("\nSize: %d\n\n",(rnaSize(myAr)));
-//    assert(rnaSize(myAr)==201);
+    assert(rna_3[8] == rnm9_m6);
 
-//    // check whether capacity has been increased correctly
-//    printf("\nCapacity: %d\n\n",(rnaCapacity(myAr)));
-//    assert(rnaCapacity(myAr)==320);
+    rna_3[6] = rn3_2;
+    assert(rna_3[6] == rn3_2);
 
-//    rnaResize(myAr, 10);
-//    assert(rnaSize(myAr) == 10);
-//    assert(rnaCapacity(myAr) == 10);
+    RationalNumber my = rna_3[6];
 
-//    rnaRemove(myAr, 5, 5);
-//    printf("\nNominators: %d ; %d\n\n",rnaGet(myAr, 5)->nominator, n7.nominator);
-//    assert(rnEqual(*rnaGet(myAr, 5), n7));
-
-//    rnaResize(myAr, 100);
-//    assert(rnaSize(myAr) == 9);
-//    assert(rnaCapacity(myAr) == 100);
-
-//    printf("RNA successful!\n");
-
-//}
+    cout << "RNA successful!\n";
+}
 
 //void myTestCallbackFunction(RationalNumberArray *data){
 //    printf("Error Callback");

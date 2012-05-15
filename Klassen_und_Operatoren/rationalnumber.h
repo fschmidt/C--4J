@@ -4,7 +4,7 @@
 #include <iostream>
 
 using namespace std;
-
+namespace rnum {
 /*
   Struct representing a Rational Number.
   */
@@ -12,6 +12,8 @@ class RationalNumber {
 public:
     RationalNumber(int nominator = 0, int denominator = 1) :
         m_nominator(nominator), m_denominator(denominator) {}
+
+    RationalNumber(double n);
 
     int nominator();
     int nominator() const;
@@ -71,6 +73,8 @@ public:
 
     RationalNumber operator+(const RationalNumber &r) const;
 
+    RationalNumber operator+=(const RationalNumber &r) ;
+
     /*
       Basic arithmetic operation Subtraction for two RationalNumbers.
       returns: the result of this - another as a Rational Number
@@ -78,6 +82,10 @@ public:
     RationalNumber sub(const RationalNumber &another) const;
 
     RationalNumber operator-(const RationalNumber &r) const;
+
+    RationalNumber operator-=(const RationalNumber &r) ;
+
+    RationalNumber operator -() const;
 
     /*
       Basic arithmetic operation Multiplication for two RationalNumbers.
@@ -87,6 +95,8 @@ public:
 
     RationalNumber operator*(const RationalNumber &r) const;
 
+    RationalNumber operator*=(const RationalNumber &r) ;
+
     /*
       Basic arithmetic operation Division  for two RationalNumbers.
       returns: the result of this / another as a Rational Number
@@ -95,6 +105,8 @@ public:
 
     RationalNumber operator/(const RationalNumber &r) const;
 
+    RationalNumber operator/=(const RationalNumber &r);
+
 private:
 
     int m_nominator;
@@ -102,8 +114,16 @@ private:
     RationalNumber normalize() const;
 
 };
+}
+rnum::RationalNumber operator +(const int l, const rnum::RationalNumber &r);
+rnum::RationalNumber operator -(const int l, const rnum::RationalNumber &r);
+rnum::RationalNumber operator *(const int l, const rnum::RationalNumber &r);
+rnum::RationalNumber operator /(const int l, const rnum::RationalNumber &r);
 
-std::ostream& operator<< (std::ostream &lhs, const RationalNumber &rhs);
+
+std::ostream& operator<< (std::ostream &lhs, const rnum::RationalNumber &rhs);
+
+
 
 #endif // RATIONALNUMBER_H
 
