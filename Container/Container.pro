@@ -2,5 +2,10 @@ TEMPLATE = app
 CONFIG += console
 CONFIG -= qt
 
-SOURCES += main.cpp
+SOURCES += \
+    pair.cpp \
+    main.cpp
+
+HEADERS += \
+    pair.h
 

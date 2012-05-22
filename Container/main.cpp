@@ -1,10 +1,13 @@
 #include <iostream>
+#include "pair.h"
 
 using namespace std;
 
-int main()
-{
-    cout << "Hello World!" << endl;
-    return 0;
-}
+template class Pair<int, int>;
 
+int main(){
+    Pair<string, int> p1;
+    cout << p1;
+
+
+}
