@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <iostream>
 #include "rationalnumber.h"
-#include "RationalNumberArray.h"
+#include "rationalnumberarray.h"
 
 void testRationalNumberArray();
 //void myTestCallbackFunction(RationalNumberArray *data);

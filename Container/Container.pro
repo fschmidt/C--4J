@@ -7,5 +7,7 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
-    pair.h
+    pair.h \
+    less.h \
+    greater.h
 
