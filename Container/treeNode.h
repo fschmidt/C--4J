@@ -52,7 +52,6 @@ public:
     TreeNode(TreeNode<T,O> up = 0, T value = T()):
         m_up(up),
         m_value(value){}
-
 }
 
 #endif // TREENODE_H

@@ -29,8 +29,6 @@ public:
     iterator first();
     iterator last();
     iterator find(const T& value);
-
-
 }
 
 
