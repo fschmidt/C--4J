@@ -3,10 +3,12 @@
 #include "less.h"
 #include "greater.h"
 #include "mapToFirst.h"
+#include "tree.h"
 
 using namespace std;
 
-template class Pair<int, int>;
+template class Pair< int, int >;
+template class Tree< int, Less<int> >;
 
 int main(){
     Pair<string, int> p1;

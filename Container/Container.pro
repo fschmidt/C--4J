@@ -3,7 +3,6 @@ CONFIG += console
 CONFIG -= qt
 
 SOURCES += \
-    pair.cpp \
     main.cpp \
     mapToFirst.cpp
 
