@@ -3,8 +3,7 @@ CONFIG += console
 CONFIG -= qt
 
 SOURCES += \
-    main.cpp \
-    mapToFirst.cpp
+    main.cpp
 
 HEADERS += \
     pair.h \

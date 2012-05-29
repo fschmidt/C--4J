@@ -4,16 +4,16 @@
 #include "less.h"
 #include "pair.h"
 
-template < typename K, typename V, typename Op = Less<K> >
+template < typename K, typename V, template <typename K> class Op = Less >
 class MapToFirst {
 private:
-    Op m_order;
+    Op<K> m_order;
 
 public:
-    bool operator () (const Pair<K, V> &lhs, const Pair<K, V> &rhs);
+    bool operator () (const Pair<K, V> &lhs, const Pair<K, V> &rhs){
+        return m_order(lhs.key(), rhs.key());
+    }
 
 };
-
-#include "mapToFirst.cpp"
 
 #endif // MAPTOFIRST_H

@@ -79,7 +79,7 @@ int main()
 
     /////////////////////////////////////////
     // TEST PAIR ORDER
-    MapToFirst< int, float, Less<int> > lessPair; //Frage Less <T>?
+    MapToFirst< int, float, Less > lessPair; //Frage Less <T>?
     cout << i_f << " < " << i_f2 << " == " << lessPair(i_f, i_f2) << endl;
 
 #if 0 // move this line down while your implementation proceeds...
