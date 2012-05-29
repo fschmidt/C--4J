@@ -4,10 +4,12 @@ CONFIG -= qt
 
 SOURCES += \
     pair.cpp \
-    main.cpp
+    main.cpp \
+    mapToFirst.cpp
 
 HEADERS += \
     pair.h \
     less.h \
-    greater.h
+    greater.h \
+    mapToFirst.h
 

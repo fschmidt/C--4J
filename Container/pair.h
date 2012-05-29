@@ -13,13 +13,21 @@ public:
         m_key(key),
         m_value(value){}
 
-    K key();
+    K key(){
+        return m_key;
+    }
 
-    K key() const;
+    K key() const{
+        return m_key;
+    }
 
-    V value();
+    V value(){
+        return m_value;
+    }
 
-    V value() const;
+    V value() const{
+        return m_value;
+    }
 
 private:
 
@@ -27,8 +35,11 @@ private:
 };
 
 template<typename K, typename V>
-std::ostream& operator<< (std::ostream& lhs, const Pair<K, V> &rhs);
+std::ostream& operator << (std::ostream& lhs, const Pair<K, V> &rhs){
+    lhs << "<" << rhs.key() << ", " << rhs.value() << ">";
+    return lhs;
+}
 
-#include "pair.cpp"
+//#include "pair.cpp"
 
 #endif // PAIR_H
