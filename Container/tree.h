@@ -14,9 +14,15 @@ private:
     TreeNode<T,O> m_root;
 
 public:
-    Tree(TreeNode root = 0): m_root(root){}
+    Tree( TreeNode root = TreeNode() ): m_root(root){}
 
-    iterator insert(const T& value);
+    iterator insert(const T& value){
+        O lessThan;
+        if(lessThan(value, m_root.m_value)){
+
+        }
+    }
+
     void clear();
     iterator begin();
     iterator end();

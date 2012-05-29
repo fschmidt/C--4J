@@ -3,7 +3,7 @@
 
 template <typename T> class Greater {
 public:
-    bool operator()(const T& lhs, const T& rhs) {
+    bool operator ()(const T& lhs, const T& rhs) {
         return lhs > rhs;
     }
 };
