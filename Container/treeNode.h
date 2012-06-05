@@ -2,8 +2,9 @@
 #define TREENODE_H
 
 #include "less.h"
-#include "tree.h"
-#include "treeIterator.h"
+
+template <typename T, typename O> class Tree;
+template <typename T, typename O> class TreeIterator;
 
 template< typename T, typename O = Less<T> >
 class TreeNode{
@@ -11,9 +12,9 @@ class TreeNode{
     friend class TreeIterator<T,O>;
 
 protected:
-    TreeNode<T,O> m_left;
-    TreeNode<T,O> m_right;
-    TreeNode<T,O> m_up;
+    TreeNode<T,O> *m_left;
+    TreeNode<T,O> *m_right;
+    TreeNode<T,O> *m_up;
     T m_value;
 
 //private:
@@ -49,9 +50,9 @@ protected:
     }
 
 public:
-    TreeNode(TreeNode<T,O> up = 0, T value = T()):
+    TreeNode(const T &value = T(), TreeNode<T,O> *up = 0):
         m_up(up),
         m_value(value){}
-}
+};
 
 #endif // TREENODE_H

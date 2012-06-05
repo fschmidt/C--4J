@@ -16,7 +16,7 @@ using namespace std;
 #include "less.h"
 #include "greater.h"
 #include "mapToFirst.h"
-//#include "tree.h"
+#include "tree.h"
 //#include "map.h"
 
 // you should define your own namespace for
@@ -55,6 +55,7 @@ int printAndCountBackwards(Container & c) {
     return n;
 }
 
+template class Tree< int >;
 
 int main()
 {
