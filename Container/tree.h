@@ -5,9 +5,6 @@
 #include "treeNode.h"
 #include "treeIterator.h"
 
-//typedef TreeIterator<T,O> iterator;
-//typedef TreeNode<T,O> node;
-
 template< typename T, typename O = Less<T> >
 class Tree{
 
@@ -15,10 +12,13 @@ private:
     TreeNode<T,O> *m_root;
 
 public:
-    Tree(TreeNode<T,O> &root = TreeNode<T,O>()):
+    typedef TreeIterator<T,O> iterator;
+    typedef TreeNode<T,O> node;
+
+    Tree(TreeNode<T,O> root = TreeNode<T,O>()):
         m_root(&root){}
 
-    TreeIterator<T,O> insert(const T &value){
+    TreeIterator<T,O>& insert(const T &value){
         if(m_root->m_value){
             m_root = new TreeNode<T,O>(value);
             return TreeIterator<T,O>(m_root, this);
@@ -27,10 +27,10 @@ public:
         O lessThan;
         if(lessThan(value, m_root->m_value)){
             Tree<T,O> *tree = new Tree<T,O>( *(m_root->m_left));
-            tree->insert(value);
+            return tree->insert(value);
         } else if(lessThan(m_root->m_value, value)){
             Tree<T,O> *tree = new Tree<T,O>( *(m_root->m_right));
-            tree->insert(value);
+            return tree->insert(value);
         } else {
             TreeNode<T,O> *inserted = new TreeNode<T,O>(value, m_root);
             if(lessThan(value, m_root->m_value)){
@@ -38,15 +38,41 @@ public:
             } else {
                 m_root->m_right = inserted;
             }
+            return TreeIterator<T,O>(m_root, this);
         }
     }
 
-    void clear();
-    TreeIterator<T,O> begin();
-    TreeIterator<T,O> end();
-    TreeIterator<T,O> first();
-    TreeIterator<T,O> last();
-    TreeIterator<T,O> find(const T &value);
+    void clear(){
+        for(TreeIterator<T,O> i = this->begin(); i != this->end(); ++i){
+
+        }
+    }
+
+    TreeIterator<T,O> begin(){
+        return first();
+    }
+
+    TreeIterator<T,O> end(){
+        return last();
+    }
+
+    TreeIterator<T,O> first(){
+        TreeNode<T,O> *node = new TreeNode<T,O>();
+        node->findFirst();
+        return TreeIterator<T,O>(node, this);
+    }
+
+    TreeIterator<T,O> last(){
+        TreeNode<T,O> *node = new TreeNode<T,O>();
+        node->findLast();
+        return TreeIterator<T,O>(node, this);
+    }
+
+    TreeIterator<T,O> find(const T &value){
+        TreeNode<T,O> *node = new TreeNode<T,O>(value);
+        node->find(value);
+        return TreeIterator<T,O>(node, this);
+    }
 };
 
 

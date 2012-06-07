@@ -22,12 +22,12 @@ protected:
         return m_value;
     }
 
-    TreeNode<T,O>* find(const T&value){
+    TreeNode<T,O>* find(const T &value){
         O lessThan;
         if( lessThan(m_value, value) ){
-            return m_right.find(value);
+            return m_right->find(value);
         } else if( lessThan(value, m_value) ){
-            return m_left.find(value);
+            return m_left->find(value);
         } else {
             return this;
         }
@@ -37,7 +37,7 @@ protected:
         if( m_left == 0 ){
             return this;
         } else {
-            m_left.findFirst();
+            return m_left->findFirst();
         }
     }
 
@@ -45,7 +45,7 @@ protected:
         if( m_right == 0 ){
             return this;
         } else {
-            m_right.findFirst();
+            return m_right->findLast();
         }
     }
 

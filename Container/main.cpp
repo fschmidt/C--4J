@@ -34,7 +34,7 @@ int printAndCount(Container & c) {
 
     int n=0;
     for(typename Container::iterator i=c.begin(); i!=c.end(); ++i, ++n)
-        cout << *i << " ";
+        cout << *i << " Test ";
 
     cout << "(" << n << " elements)." << endl;
 
@@ -83,7 +83,7 @@ int main()
     MapToFirst< int, float, Less > lessPair; //Frage Less <T>?
     cout << i_f << " < " << i_f2 << " == " << lessPair(i_f, i_f2) << endl;
 
-#if 0 // move this line down while your implementation proceeds...
+
     /////////////////////////////////////////
     // TEST TREE
 
@@ -141,7 +141,7 @@ int main()
     cout << "listing backwards: ";
     assert(printAndCountBackwards(ft) == 4);
 
-
+#if 0 // move this line down while your implementation proceeds...
     /////////////////////////////////////////
     // TEST MAP
 
