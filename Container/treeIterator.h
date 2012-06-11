@@ -27,9 +27,13 @@ public:
     TreeIterator<T,O>& operator++() {
         if(m_node->m_right) {
             return getLeftIterator(m_node);
+        } else if (*this == m_tree->last()) {
+            TreeIterator<T,O> iterator = m_tree->end();
+            this->m_node = iterator.m_node;
+            return *this;
         } else {
-            TreeIterator<T,O> *iterator = new TreeIterator<T,O>( (m_node->m_up) );
-            return *iterator;
+            this->m_node = m_node->m_up;
+            return *this;
         }
     }
 
@@ -37,8 +41,8 @@ public:
         if(m_node->m_left) {
             return getRightIterator(m_node);
         } else {
-            TreeIterator<T,O> *iterator = new TreeIterator<T,O>( (m_node->m_up) );
-            return *iterator;
+            this->m_node = m_node->m_up;
+            return *this;
         }
     }
 
@@ -54,8 +58,8 @@ private:
 
     TreeIterator<T,O>& getLeftIterator(TreeNode<T,O> *node) {
         if(!node->m_left) {
-            TreeIterator<T,O> *iterator = new TreeIterator<T,O>( node );
-            return *iterator;
+            this->m_node = node;
+            return *this;
         } else {
             return getLeftIterator(node->m_left);
         }
@@ -63,8 +67,8 @@ private:
 
     TreeIterator<T,O>& getRightIterator(TreeNode<T,O> *node) {
         if(!node->m_right) {
-            TreeIterator<T,O> *iterator = new TreeIterator<T,O>( node );
-            return *iterator;
+            this->m_node = node;
+            return *this;
         } else {
             return getLeftIterator(node->m_right);
         }

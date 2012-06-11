@@ -15,21 +15,23 @@ public:
     typedef TreeIterator<T,O> iterator;
     typedef TreeNode<T,O> node;
 
-    Tree(TreeNode<T,O> root = TreeNode<T,O>()):
-        m_root(&root){}
+
+    Tree(TreeNode<T,O> *root = 0):
+        m_root(root){}
 
     TreeIterator<T,O>& insert(const T &value){
         if(m_root->m_value){
             m_root = new TreeNode<T,O>(value);
-            return TreeIterator<T,O>(m_root, this);
+            TreeIterator<T,O> *iterator = new TreeIterator<T,O>(m_root, this);
+            return *iterator;
         }
 
         O lessThan;
         if(lessThan(value, m_root->m_value)){
-            Tree<T,O> *tree = new Tree<T,O>( *(m_root->m_left));
+            Tree<T,O> *tree = new Tree<T,O>( m_root->m_left);
             return tree->insert(value);
         } else if(lessThan(m_root->m_value, value)){
-            Tree<T,O> *tree = new Tree<T,O>( *(m_root->m_right));
+            Tree<T,O> *tree = new Tree<T,O>( m_root->m_right);
             return tree->insert(value);
         } else {
             TreeNode<T,O> *inserted = new TreeNode<T,O>(value, m_root);
@@ -38,13 +40,13 @@ public:
             } else {
                 m_root->m_right = inserted;
             }
-            return TreeIterator<T,O>(m_root, this);
+            TreeIterator<T,O> *iterator = new TreeIterator<T,O>(m_root, this);
+            return *iterator;
         }
     }
 
     void clear(){
         for(TreeIterator<T,O> i = this->begin(); i != this->end(); ++i){
-
         }
     }
 
@@ -53,7 +55,8 @@ public:
     }
 
     TreeIterator<T,O> end(){
-        return last();
+        TreeNode<T,O> *node = 0;
+        return TreeIterator<T,O>(node, this);
     }
 
     TreeIterator<T,O> first(){

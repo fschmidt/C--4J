@@ -2,6 +2,8 @@
 #define TREENODE_H
 
 #include "less.h"
+//#include "tree.h"
+//#include "treeIterator.h"
 
 template <typename T, typename O> class Tree;
 template <typename T, typename O> class TreeIterator;
@@ -37,7 +39,7 @@ protected:
         if( m_left == 0 ){
             return this;
         } else {
-            return m_left->findFirst();
+           return m_left->findFirst();
         }
     }
 
