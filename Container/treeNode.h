@@ -2,9 +2,8 @@
 #define TREENODE_H
 
 #include "less.h"
-//#include "tree.h"
-//#include "treeIterator.h"
 
+namespace myContainer {
 template <typename T, typename O> class Tree;
 template <typename T, typename O> class TreeIterator;
 
@@ -27,9 +26,15 @@ protected:
     TreeNode<T,O>* find(const T &value){
         O lessThan;
         if( lessThan(m_value, value) ){
-            return m_right->find(value);
+            if(m_right){
+                return m_right->find(value);
+            }
+            return 0;
         } else if( lessThan(value, m_value) ){
-            return m_left->find(value);
+            if(m_left){
+                return m_left->find(value);
+            }
+            return 0;
         } else {
             return this;
         }
@@ -38,8 +43,6 @@ protected:
     TreeNode<T,O>* findFirst(){
         if( this && m_left ){
             return m_left->findFirst();
-        } else if( m_right ){
-            return m_right->findFirst();
         } else {
            return this;
         }
@@ -48,8 +51,6 @@ protected:
     TreeNode<T,O>* findLast(){
         if( this && m_right ){
             return m_right->findLast();
-        } else if( m_left ){
-            return m_left->findLast();
         } else {
             return this;
         }
@@ -63,5 +64,6 @@ public:
         m_right = 0;
     }
 };
+}
 
 #endif // TREENODE_H

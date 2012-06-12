@@ -17,11 +17,11 @@ using namespace std;
 #include "greater.h"
 #include "mapToFirst.h"
 #include "tree.h"
-//#include "map.h"
+#include "map.h"
 
 // you should define your own namespace for
 // the templates/classes in this project
-//using namespace mystl;
+using namespace myContainer;
 
 // explicit template instantiation for compiling / debugging
 //template class Pair<int,string>;
@@ -153,7 +153,6 @@ int main()
     Pair<int,string> p7(7,"James Bond");
     string value;
 
-#if 0 // move this line down while your implementation proceeds...
     Map<int,string, MapToFirst<int,string,Less> > m;
 
     // insert pairs of (key,value)
@@ -164,16 +163,17 @@ int main()
 
     // test finding elements via operator()
     cout << "find 42 in map: " << (value=m[42]) << endl;
-    assert(value == p42.second());
+    assert(value == p42.value());
+
     cout << "find 3 in map: " << (value=m[3]) << endl;
     assert(value == string());
 
     // direct write access via operator[]
     cout << "setting m[3] and m[1]." << endl;
-    m[1] = p1.second();
-    m[3] = p3.second();
+    m[1] = p1.value();
+    m[3] = p3.value();
     cout << "find 3 in map: " << (value=m[3]) << endl;
-    assert(value == p3.second());
+    assert(value == p3.value());
 
     cout << "resulting map: ";
     assert(printAndCount(m) == 4);
@@ -183,11 +183,11 @@ int main()
     Map<int,string>::iterator last = m.last();
     cout << "first in map: " << *first << endl;
     cout << "last in map: " << *last << endl;
-    assert(first->first() == 1);
-    assert(last->first() == 42);
-    assert(m.min() == first->first());
-    assert(m.max() == last->first());
-
+    assert(first->key() == 1);
+    assert(last->key() == 42);
+    assert(m.min() == first->key());
+    assert(m.max() == last->key());
+#if 0 // move this line down while your implementation proceeds...
 #endif
 
     cout << "Success!" << endl;

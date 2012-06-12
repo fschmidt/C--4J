@@ -5,6 +5,7 @@
 #include "tree.h"
 #include "treeNode.h"
 
+namespace myContainer {
 template< typename T, typename O = Less<T> >
 class TreeIterator {
 private:
@@ -42,10 +43,7 @@ public:
     TreeIterator<T,O>& operator--() {
         if( !m_node ){
             this->m_node = this->m_tree->last().m_node;
-            if(this->m_node == this->m_tree->Root()){
-                return findFirstRightTree(this->m_node); // this is magic, do not touch !!
-            }
-            return *this;
+            return findFirstRightTree(this->m_node); // this is magic, do not touch !!
         } else if(m_node->m_up && m_node->m_up->m_left &&  m_node->m_up->m_left != m_node){
             return toNextLeft(m_node->m_up->m_left);
         } else if(m_node->m_up){
@@ -61,7 +59,7 @@ public:
     }
 
     bool operator != (const TreeIterator<T,O> &rhs){
-        return !(this->m_tree == rhs.m_tree && this->m_node == rhs.m_node);
+        return this->m_tree != rhs.m_tree || this->m_node != rhs.m_node;
     }
 
 private:
@@ -103,5 +101,6 @@ private:
         }
     }
 };
+}
 
 #endif // TREEITERATOR_H

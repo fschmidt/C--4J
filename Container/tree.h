@@ -5,12 +5,12 @@
 #include "treeNode.h"
 #include "treeIterator.h"
 
+namespace myContainer {
 template< typename T, typename O = Less<T> >
 class Tree{
 
 private:
     TreeNode<T,O> *m_root;
-
 
 public:
     typedef TreeIterator<T,O> iterator;
@@ -38,7 +38,7 @@ public:
             }
             TreeNode<T,O> *inserted = new TreeNode<T,O>(value, m_root);
             m_root->m_left = inserted;
-            TreeIterator<T,O> *iterator = new TreeIterator<T,O>(m_root, this);
+            TreeIterator<T,O> *iterator = new TreeIterator<T,O>(m_root->m_left, this);
             return *iterator;
         }
         if(lessThan(m_root->m_value, value)){
@@ -94,11 +94,16 @@ public:
     }
 
     TreeIterator<T,O> find(const T &value){
-        TreeNode<T,O> *node = new TreeNode<T,O>(value);
-        node->find(value);
-        return TreeIterator<T,O>(node, this);
+        TreeNode<T,O> *node = this->m_root->find(value);
+        if(node != 0){
+            return TreeIterator<T,O>(node, this);
+        } else {
+            return this->end();
+        }
     }
 };
+
+}
 
 
 #endif // TREE_H

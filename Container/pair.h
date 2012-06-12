@@ -13,19 +13,19 @@ public:
         m_key(key),
         m_value(value){}
 
-    K key(){
+    K &key(){
         return m_key;
     }
 
-    K key() const{
+    const K &key() const{
         return m_key;
     }
 
-    V value(){
+    V &value(){
         return m_value;
     }
 
-    V value() const{
+    const V &value() const{
         return m_value;
     }
 
