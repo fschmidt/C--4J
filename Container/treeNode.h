@@ -36,7 +36,7 @@ protected:
     }
 
     TreeNode<T,O>* findFirst(){
-        if( m_left == 0 ){
+        if( this == 0 || m_left == 0 ){
             return this;
         } else {
            return m_left->findFirst();
@@ -44,7 +44,7 @@ protected:
     }
 
     TreeNode<T,O>* findLast(){
-        if( m_right == 0 ){
+        if( this == 0 || m_right == 0 ){
             return this;
         } else {
             return m_right->findLast();
@@ -54,7 +54,10 @@ protected:
 public:
     TreeNode(const T &value = T(), TreeNode<T,O> *up = 0):
         m_up(up),
-        m_value(value){}
+        m_value(value){
+        m_left = 0;
+        m_right = 0;
+    }
 };
 
 #endif // TREENODE_H

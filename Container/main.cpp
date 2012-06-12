@@ -32,11 +32,10 @@ using namespace std;
 template<class Container>
 int printAndCount(Container & c) {
 
-    int n=0;
+    int n = 0;
     for(typename Container::iterator i=c.begin(); i!=c.end(); ++i, ++n){
-        cout << *i;
+        cout << *i << " ";
     }
-
     cout << "(" << n << " elements)." << endl;
 
     return n;
@@ -93,7 +92,7 @@ int main()
     cout << "empty tree: ";
     assert(printAndCount(t) == 0);
 
-#if 0 // move this line down while your implementation proceeds...
+
     // insert elements in a certain order
     t.insert(4);
     t.insert(3);
@@ -139,7 +138,7 @@ int main()
     assert(printAndCount(ft) == 4);
 
     // if we list elements backwards, they should be
-    //   in the same order as with the function Less<>
+    // in the same order as with the function Less<>
     cout << "listing backwards: ";
     assert(printAndCountBackwards(ft) == 4);
 
@@ -152,6 +151,7 @@ int main()
     Pair<int,string> p7(7,"James Bond");
     string value;
 
+#if 0 // move this line down while your implementation proceeds...
     Map<int,string, MapToFirst<int,string,Less> > m;
 
     // insert pairs of (key,value)
