@@ -113,8 +113,10 @@ int main()
     t.insert(3);
     t.insert(5);
     t.insert(4);
-    cout << "tree 1-2-3-5-4: ";
+    cout << "tree ++ 1-2-3-5-4: ";
     assert(printAndCount(t) == 5);
+    cout << "tree -- 1-2-3-5-4: ";
+    assert(printAndCountBackwards(t) == 5);
 
     // and yet another insertion sequence
     t.clear();

@@ -36,18 +36,22 @@ protected:
     }
 
     TreeNode<T,O>* findFirst(){
-        if( this == 0 || m_left == 0 ){
-            return this;
+        if( this && m_left ){
+            return m_left->findFirst();
+        } else if( m_right ){
+            return m_right->findFirst();
         } else {
-           return m_left->findFirst();
+           return this;
         }
     }
 
     TreeNode<T,O>* findLast(){
-        if( this == 0 || m_right == 0 ){
-            return this;
-        } else {
+        if( this && m_right ){
             return m_right->findLast();
+        } else if( m_left ){
+            return m_left->findLast();
+        } else {
+            return this;
         }
     }
 
