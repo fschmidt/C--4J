@@ -12,8 +12,8 @@ public:
     typedef TreeIterator< Pair<K, V>, O > iterator;
 
     /*
-     Saerch a value into the map if not found insert the value in the map
-     return A the value of the found Object if found the value else the new inserted note
+     search a key into the map if not found inserts the key
+     returns the value mapped to the given key
      */
     V& operator[](const K& key){
         iterator iterator = this->find(key);

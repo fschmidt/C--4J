@@ -35,7 +35,7 @@ public:
         }
 
         O lessThan;
-        if(lessThan(value, m_root->m_value)){ //go in the left sube tree
+        if(lessThan(value, m_root->m_value)){ //go in the left subtree
             if((m_root->m_left) ){
                 Tree<T,O> *tree = new Tree<T,O>( m_root->m_left);
                 return tree->insert(value);
@@ -46,7 +46,7 @@ public:
             TreeIterator<T,O> *iterator = new TreeIterator<T,O>(m_root->m_left, this);
             return *iterator;
         }
-        if(lessThan(m_root->m_value, value)){ //go in the right sube tree
+        if(lessThan(m_root->m_value, value)){ //go in the right subtree
             if((m_root->m_right)){
                 Tree<T,O> *tree = new Tree<T,O>( m_root->m_right);
                 return tree->insert(value);
@@ -74,11 +74,14 @@ public:
      clear the tree
      */
     void clear(){
+
+        // if there's a left tree clear it recursive
         if(m_root->m_left){
             Tree leftTree = m_root->m_left;
             leftTree.clear();
             delete m_root->m_left;
         }
+        // if there's a right tree clear it recursive
         if(m_root->m_right){
             Tree rightTree = m_root->m_right;
             rightTree.clear();
