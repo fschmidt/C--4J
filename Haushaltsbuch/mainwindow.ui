@@ -26,46 +26,37 @@
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit_name"/>
+     <widget class="QLineEdit" name="lineEdit_name">
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
     </item>
-    <item row="1" column="0">
+    <item row="2" column="0">
      <widget class="QLabel" name="label_summe">
       <property name="text">
        <string>Summe:</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="lineEdit_summe">
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="inputMethodHints">
-       <set>Qt::ImhFormattedNumbersOnly</set>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
+    <item row="4" column="0">
      <widget class="QLabel" name="label_kategorie">
       <property name="text">
        <string>Kategorie:</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QComboBox" name="comboBox_kategorie"/>
+    <item row="4" column="1">
+     <widget class="QComboBox" name="comboBox_categorie"/>
     </item>
-    <item row="3" column="0">
+    <item row="5" column="0">
      <widget class="QLabel" name="label_art">
       <property name="text">
        <string>Art:</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
+    <item row="5" column="1">
      <widget class="QComboBox" name="comboBox_art">
       <item>
        <property name="text">
@@ -79,7 +70,10 @@
       </item>
      </widget>
     </item>
-    <item row="5" column="0">
+    <item row="6" column="1">
+     <widget class="QDateTimeEdit" name="dateTimeEdit"/>
+    </item>
+    <item row="7" column="0">
      <widget class="QLabel" name="label_beschreibung">
       <property name="text">
        <string>Beschreibung:</string>
@@ -87,6 +81,9 @@
      </widget>
     </item>
     <item row="7" column="1">
+     <widget class="QTextEdit" name="textEdit_discription"/>
+    </item>
+    <item row="9" column="1">
      <widget class="QWidget" name="widget" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <property name="margin">
@@ -122,8 +119,15 @@
       </layout>
      </widget>
     </item>
-    <item row="5" column="1">
-     <widget class="QTextEdit" name="textEdit_discription"/>
+    <item row="6" column="0">
+     <widget class="QLabel" name="label_Date">
+      <property name="text">
+       <string>Date</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QDoubleSpinBox" name="doubleSpinBox_summe"/>
     </item>
    </layout>
   </widget>
@@ -146,7 +150,14 @@
     <property name="title">
      <string>Database</string>
     </property>
-    <addaction name="actionAdd_Kategorie"/>
+    <widget class="QMenu" name="menuCategorie">
+     <property name="title">
+      <string>Categorie</string>
+     </property>
+     <addaction name="actionAdd_Categorie"/>
+     <addaction name="actionDelete_Categorie"/>
+    </widget>
+    <addaction name="menuCategorie"/>
    </widget>
    <addaction name="menuDatei"/>
    <addaction name="menuDatabase"/>
@@ -165,9 +176,14 @@
     <string>Close</string>
    </property>
   </action>
-  <action name="actionAdd_Kategorie">
+  <action name="actionAdd_Categorie">
    <property name="text">
-    <string>Add Kategorie</string>
+    <string>Add Categorie</string>
+   </property>
+  </action>
+  <action name="actionDelete_Categorie">
+   <property name="text">
+    <string>Delete Categorie</string>
    </property>
   </action>
  </widget>

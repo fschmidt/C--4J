@@ -5,6 +5,10 @@
 #include <QtSql/QSqlDriverPlugin>
 #include "QString"
 #include "posting.h"
+#include "category.h"
+
+#include <iostream>
+using namespace std;
 
 class DatabaseConection{
 private:
@@ -27,27 +31,7 @@ public:
 
         m_database.open();
         m_database.transaction();
-        QSqlQuery querry;
-        querry.prepare("CREATE TABLE IF NOT EXISTS `category` ("
-                       "    `id` int(11) NOT NULL AUTO_INCREMENT,"
-                       "    `name` varchar(255) NOT NULL,"
-                       "    PRIMARY KEY (`id`)"
-                       "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
-        querry.exec();
-        querry.prepare("CREATE TABLE IF NOT EXISTS `entrys` ("
-                       "`id` int(11) NOT NULL AUTO_INCREMENT,"
-                       "`name` varchar(255) DEFAULT NULL,"
-                       "`sum` double DEFAULT NULL,"
-                       "`category` int(11) NOT NULL,"
-                       "`art` tinyint(1) NOT NULL,"
-                       "`description` text,"
-                       "PRIMARY KEY (`id`),"
-                       "KEY `category` (`category`)"
-                       ") ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
-        querry.exec();
-        querry.prepare("ALTER TABLE `entrys`"
-                       "ADD CONSTRAINT `entrys_ibfk_1` FOREIGN KEY (`category`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;");
-        querry.exec();
+        gerateTabel();
         m_database.commit();
         m_database.close();
     }
@@ -66,25 +50,96 @@ public:
     void close(){
         return m_database.close();
     }
+
+    QList<Category> giveCategorie(){
+        QList<Category> result;
+        m_database.open();
+
+        QSqlQuery query;
+        query.prepare("SELECT * FROM `cpp`.`category`");
+        query.exec();
+        int idfield = query.record().indexOf("id");
+        int namefield = query.record().indexOf("name");
+        while (query.next()) {
+             Category category(query.value(idfield).toInt(), query.value(namefield).toString());
+             result << category;
+         }
+
+        m_database.close();
+        return result;
+    }
+
+    void addCategory(Category &category){
+        m_database.open();
+
+        QSqlQuery query;
+        query.prepare("INSERT INTO `cpp`.`category` (`name`) "
+                      "VALUES (:name);");
+        query.bindValue(":name", category.name());
+        query.exec();
+
+        m_database.close();
+    }
+
+    void deleteCategory(Category &category){
+        m_database.open();
+
+        QSqlQuery query;
+        query.prepare("DELETE FROM `cpp`.`category` WHERE `category`.`id` = :id ");
+        query.bindValue(":id", category.id());
+        query.exec();
+
+        m_database.close();
+    }
+
 public slots:
     void sendBuchungsQuerry(Posting *post){
         m_database.open();
         m_database.transaction();
 
         QSqlQuery query;
-        query.prepare("INSERT INTO `cpp`.`entrys` (`name`, `sum`, `category`, `art`, `description`) "
-                      "VALUES (:name, :sum, :category, :art, :description)");
+        query.prepare("INSERT INTO `cpp`.`entrys` (`name`, `sum`, `category`, `art`, `description`, `date`) "
+                      "VALUES (:name, :sum, :category, :art, :description, :date)");
         query.bindValue(":name", post->name());
         query.bindValue(":sum", post->sum());
+
         query.bindValue(":category", post->categorie());
+
         query.bindValue(":art", post->earning());
         query.bindValue(":description", post->discription());
+        query.bindValue(":date", post->date());
         query.exec();
 
 
         m_database.commit();
         m_database.close();
-        query.lastError().text();
+        cout << endl << query.lastError().text().toStdString() << endl;
+    }
+
+private:
+    void gerateTabel(){
+        QSqlQuery querry;
+        querry.prepare("CREATE TABLE IF NOT EXISTS `category` ("
+                       "    `id` int(11) NOT NULL AUTO_INCREMENT,"
+                       "    `name` varchar(255) NOT NULL,"
+                       "    PRIMARY KEY (`id`)"
+                       "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+        querry.exec();
+        querry.prepare("CREATE TABLE IF NOT EXISTS `entrys` ("
+                       "`id` int(11) NOT NULL AUTO_INCREMENT,"
+                       "`name` varchar(255) DEFAULT NULL,"
+                       "`sum` double DEFAULT NULL,"
+                       "`category` int(11) NOT NULL,"
+                       "`art` tinyint(1) NOT NULL,"
+                       "`description` text,"
+                       "`date` date NOT NULL,"
+                       "PRIMARY KEY (`id`),"
+                       "KEY `category` (`category`)"
+                       ") ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+        querry.exec();
+        querry.prepare("ALTER TABLE `entrys`"
+                       "ADD CONSTRAINT `entrys_ibfk_1` FOREIGN KEY (`category`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;");
+        querry.exec();
     }
 };
 

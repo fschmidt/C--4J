@@ -22,9 +22,11 @@ public:
     bool databaseOpen();
     void databaseClose();
 
+    void genrateCategorie();
 public slots:
     void submit();
-
+    void openCreateCategory();
+    void openDeleteCategory();
 signals:
     void stausMassage(const QString &massage);
 
