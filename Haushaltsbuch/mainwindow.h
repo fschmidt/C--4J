@@ -27,6 +27,7 @@ public slots:
     void submit();
     void openCreateCategory();
     void openDeleteCategory();
+    void openShowInput();
 signals:
     void stausMassage(const QString &massage);
 

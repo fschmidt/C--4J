@@ -6,84 +6,134 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>339</height>
+    <width>433</width>
+    <height>408</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>book of household</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QFormLayout" name="formLayout">
-    <property name="fieldGrowthPolicy">
-     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-    </property>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_name">
-      <property name="text">
-       <string>Name:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit_name">
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_summe">
-      <property name="text">
-       <string>Summe:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="label_kategorie">
-      <property name="text">
-       <string>Kategorie:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <widget class="QComboBox" name="comboBox_categorie"/>
-    </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="label_art">
-      <property name="text">
-       <string>Art:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QComboBox" name="comboBox_art">
-      <item>
-       <property name="text">
-        <string>Eingaben</string>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QWidget" name="widget_2" native="true">
+      <layout class="QFormLayout" name="formLayout">
+       <property name="margin">
+        <number>0</number>
        </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ausgaben</string>
-       </property>
-      </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit_name">
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
+        <widget class="QLabel" name="label_art">
+         <property name="text">
+          <string>Art:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1">
+        <widget class="QTextEdit" name="textEdit_discription"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_name">
+         <property name="text">
+          <string>Name:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_summe">
+         <property name="text">
+          <string>Summe:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QDoubleSpinBox" name="doubleSpinBox_summe"/>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_kategorie">
+         <property name="text">
+          <string>Kategorie:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QComboBox" name="comboBox_categorie"/>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="label_Date">
+         <property name="text">
+          <string>Date</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QDateTimeEdit" name="dateTimeEdit">
+         <property name="dateTime">
+          <datetime>
+           <hour>8</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2012</year>
+           <month>7</month>
+           <day>10</day>
+          </datetime>
+         </property>
+         <property name="date">
+          <date>
+           <year>2012</year>
+           <month>7</month>
+           <day>10</day>
+          </date>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1">
+        <widget class="QComboBox" name="comboBox_art">
+         <item>
+          <property name="text">
+           <string>Eingaben</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Ausgaben</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <widget class="QLabel" name="label_beschreibung">
+         <property name="text">
+          <string>Beschreibung:</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
-    <item row="6" column="1">
-     <widget class="QDateTimeEdit" name="dateTimeEdit"/>
-    </item>
-    <item row="7" column="0">
-     <widget class="QLabel" name="label_beschreibung">
-      <property name="text">
-       <string>Beschreibung:</string>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
       </property>
-     </widget>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
     </item>
-    <item row="7" column="1">
-     <widget class="QTextEdit" name="textEdit_discription"/>
-    </item>
-    <item row="9" column="1">
+    <item>
      <widget class="QWidget" name="widget" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <property name="margin">
@@ -119,16 +169,6 @@
       </layout>
      </widget>
     </item>
-    <item row="6" column="0">
-     <widget class="QLabel" name="label_Date">
-      <property name="text">
-       <string>Date</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QDoubleSpinBox" name="doubleSpinBox_summe"/>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -136,7 +176,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>433</width>
      <height>25</height>
     </rect>
    </property>
@@ -152,12 +192,13 @@
     </property>
     <widget class="QMenu" name="menuCategorie">
      <property name="title">
-      <string>Categorie</string>
+      <string>Category</string>
      </property>
      <addaction name="actionAdd_Categorie"/>
      <addaction name="actionDelete_Categorie"/>
     </widget>
     <addaction name="menuCategorie"/>
+    <addaction name="actionShow_Input"/>
    </widget>
    <addaction name="menuDatei"/>
    <addaction name="menuDatabase"/>
@@ -183,11 +224,26 @@
   </action>
   <action name="actionDelete_Categorie">
    <property name="text">
-    <string>Delete Categorie</string>
+    <string>Delete Category</string>
+   </property>
+  </action>
+  <action name="actionShow_Input">
+   <property name="text">
+    <string>Show Input</string>
    </property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>lineEdit_name</tabstop>
+  <tabstop>doubleSpinBox_summe</tabstop>
+  <tabstop>comboBox_categorie</tabstop>
+  <tabstop>dateTimeEdit</tabstop>
+  <tabstop>comboBox_art</tabstop>
+  <tabstop>textEdit_discription</tabstop>
+  <tabstop>pushButton_submit</tabstop>
+  <tabstop>pushButton_close</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

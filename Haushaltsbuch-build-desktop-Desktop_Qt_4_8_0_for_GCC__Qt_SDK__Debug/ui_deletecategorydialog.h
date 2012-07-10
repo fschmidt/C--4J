@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'deletecategorydialog.ui'
 **
-** Created: Mon Jul 9 15:53:04 2012
+** Created: Tue Jul 10 12:52:07 2012
 **      by: Qt User Interface Compiler version 4.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -17,9 +17,9 @@
 #include <QtGui/QDialog>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
-#include <QtGui/QListView>
 #include <QtGui/QPushButton>
 #include <QtGui/QSpacerItem>
+#include <QtGui/QTableView>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
@@ -29,24 +29,33 @@ class Ui_deleteCategoryDialog
 {
 public:
     QVBoxLayout *verticalLayout;
-    QListView *listView_Category;
+    QTableView *tableView_Category;
+    QSpacerItem *verticalSpacer;
     QWidget *widget;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
+    QPushButton *pushButton_Cancel;
     QPushButton *pushButton_Delete;
-    QPushButton *pushButton_OK;
 
     void setupUi(QDialog *deleteCategoryDialog)
     {
         if (deleteCategoryDialog->objectName().isEmpty())
             deleteCategoryDialog->setObjectName(QString::fromUtf8("deleteCategoryDialog"));
-        deleteCategoryDialog->resize(400, 300);
+        deleteCategoryDialog->setEnabled(true);
+        deleteCategoryDialog->resize(400, 229);
         verticalLayout = new QVBoxLayout(deleteCategoryDialog);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        listView_Category = new QListView(deleteCategoryDialog);
-        listView_Category->setObjectName(QString::fromUtf8("listView_Category"));
+        tableView_Category = new QTableView(deleteCategoryDialog);
+        tableView_Category->setObjectName(QString::fromUtf8("tableView_Category"));
+        tableView_Category->setEnabled(true);
+        tableView_Category->setSelectionMode(QAbstractItemView::SingleSelection);
+        tableView_Category->setSelectionBehavior(QAbstractItemView::SelectRows);
 
-        verticalLayout->addWidget(listView_Category);
+        verticalLayout->addWidget(tableView_Category);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer);
 
         widget = new QWidget(deleteCategoryDialog);
         widget->setObjectName(QString::fromUtf8("widget"));
@@ -57,19 +66,20 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
+        pushButton_Cancel = new QPushButton(widget);
+        pushButton_Cancel->setObjectName(QString::fromUtf8("pushButton_Cancel"));
+
+        horizontalLayout->addWidget(pushButton_Cancel);
+
         pushButton_Delete = new QPushButton(widget);
         pushButton_Delete->setObjectName(QString::fromUtf8("pushButton_Delete"));
 
         horizontalLayout->addWidget(pushButton_Delete);
 
-        pushButton_OK = new QPushButton(widget);
-        pushButton_OK->setObjectName(QString::fromUtf8("pushButton_OK"));
-
-        horizontalLayout->addWidget(pushButton_OK);
-
 
         verticalLayout->addWidget(widget);
 
+        QWidget::setTabOrder(pushButton_Cancel, pushButton_Delete);
 
         retranslateUi(deleteCategoryDialog);
 
@@ -78,9 +88,9 @@ public:
 
     void retranslateUi(QDialog *deleteCategoryDialog)
     {
-        deleteCategoryDialog->setWindowTitle(QApplication::translate("deleteCategoryDialog", "Dialog", 0, QApplication::UnicodeUTF8));
+        deleteCategoryDialog->setWindowTitle(QApplication::translate("deleteCategoryDialog", "Delete Category", 0, QApplication::UnicodeUTF8));
+        pushButton_Cancel->setText(QApplication::translate("deleteCategoryDialog", "Cancel", 0, QApplication::UnicodeUTF8));
         pushButton_Delete->setText(QApplication::translate("deleteCategoryDialog", "Delete", 0, QApplication::UnicodeUTF8));
-        pushButton_OK->setText(QApplication::translate("deleteCategoryDialog", "OK", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

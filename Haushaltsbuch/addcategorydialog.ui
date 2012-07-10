@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Add Category</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -55,6 +55,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_newCategorie</tabstop>
+  <tabstop>pushButton_OK</tabstop>
+  <tabstop>pushButton_Cancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

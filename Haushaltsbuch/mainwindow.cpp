@@ -5,6 +5,7 @@
 #include "QVariant"
 #include "addcategorydialog.h"
 #include "deletecategorydialog.h"
+#include "showinputdialog.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButton_submit, SIGNAL(clicked()), this, SLOT(submit()));
     connect(ui->actionAdd_Categorie, SIGNAL(triggered()), this, SLOT(openCreateCategory()));
     connect(ui->actionDelete_Categorie, SIGNAL(triggered()), this, SLOT(openDeleteCategory()));
+    connect(ui->actionShow_Input, SIGNAL(triggered()), this, SLOT(openShowInput()));
 //    connect(this, SIGNAL(stausMassage(QString)), ui->statusBar, SLOT(showMessage(QString)));
 }
 
@@ -61,7 +63,6 @@ void MainWindow::submit(){
     ui->lineEdit_name->clear();
     ui->textEdit_discription->clear();
     ui->doubleSpinBox_summe->clear();
-    ui->dateTimeEdit->clear();
 }
 
 void MainWindow::openCreateCategory() {
@@ -72,6 +73,13 @@ void MainWindow::openCreateCategory() {
 }
 
 void MainWindow::openDeleteCategory(){
-    deleteCategoryDialog dialog(this);
+    deleteCategoryDialog dialog(this, m_database);
+    dialog.exec();
+    ui->comboBox_categorie->clear();
+    this->genrateCategorie();
+}
+
+void MainWindow::openShowInput() {
+    ShowInputDialog dialog(this, m_database);
     dialog.exec();
 }

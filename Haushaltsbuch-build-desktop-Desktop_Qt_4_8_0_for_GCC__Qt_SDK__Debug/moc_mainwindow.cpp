@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Mon Jul 9 15:54:35 2012
+** Created: Tue Jul 10 12:33:53 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -37,6 +37,7 @@ static const uint qt_meta_data_MainWindow[] = {
       42,   11,   11,   11, 0x0a,
       51,   11,   11,   11, 0x0a,
       72,   11,   11,   11, 0x0a,
+      93,   11,   11,   11, 0x0a,
 
        0        // eod
 };
@@ -44,7 +45,7 @@ static const uint qt_meta_data_MainWindow[] = {
 static const char qt_meta_stringdata_MainWindow[] = {
     "MainWindow\0\0massage\0stausMassage(QString)\0"
     "submit()\0openCreateCategory()\0"
-    "openDeleteCategory()\0"
+    "openDeleteCategory()\0openShowInput()\0"
 };
 
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -57,6 +58,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->submit(); break;
         case 2: _t->openCreateCategory(); break;
         case 3: _t->openDeleteCategory(); break;
+        case 4: _t->openShowInput(); break;
         default: ;
         }
     }
@@ -94,9 +96,9 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

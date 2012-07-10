@@ -16,7 +16,8 @@ SOURCES += main.cpp\
     category.cpp \
     config_reader.cpp \
     addcategorydialog.cpp \
-    deletecategorydialog.cpp
+    deletecategorydialog.cpp \
+    showinputdialog.cpp
 
 HEADERS  += mainwindow.h \
     databaseconection.h \
@@ -24,11 +25,13 @@ HEADERS  += mainwindow.h \
     category.h \
     config_reader.h \
     addcategorydialog.h \
-    deletecategorydialog.h
+    deletecategorydialog.h \
+    showinputdialog.h
 
 FORMS    += mainwindow.ui \
     addcategorydialog.ui \
-    deletecategorydialog.ui
+    deletecategorydialog.ui \
+    showinputdialog.ui
 
 OTHER_FILES += \
     config.ini

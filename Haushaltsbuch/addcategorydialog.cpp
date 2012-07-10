@@ -19,7 +19,7 @@ AddCategoryDialog::~AddCategoryDialog(){
 
 void AddCategoryDialog::accept(){
     QString name = ui->lineEdit_newCategorie->text();
-    if(name.isEmpty()){
+    if(!name.isEmpty()){
         Category *category = new Category(name);
         m_db->addCategory(*category);
     }

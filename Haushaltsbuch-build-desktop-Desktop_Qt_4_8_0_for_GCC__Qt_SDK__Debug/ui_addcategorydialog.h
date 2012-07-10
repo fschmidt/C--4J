@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'addcategorydialog.ui'
 **
-** Created: Mon Jul 9 15:07:26 2012
+** Created: Tue Jul 10 12:52:07 2012
 **      by: Qt User Interface Compiler version 4.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -70,6 +70,8 @@ public:
 
         verticalLayout->addWidget(widget);
 
+        QWidget::setTabOrder(lineEdit_newCategorie, pushButton_OK);
+        QWidget::setTabOrder(pushButton_OK, pushButton_Cancel);
 
         retranslateUi(AddCategoryDialog);
 
@@ -78,7 +80,7 @@ public:
 
     void retranslateUi(QDialog *AddCategoryDialog)
     {
-        AddCategoryDialog->setWindowTitle(QApplication::translate("AddCategoryDialog", "Dialog", 0, QApplication::UnicodeUTF8));
+        AddCategoryDialog->setWindowTitle(QApplication::translate("AddCategoryDialog", "Add Category", 0, QApplication::UnicodeUTF8));
         pushButton_Cancel->setText(QApplication::translate("AddCategoryDialog", "Cancel", 0, QApplication::UnicodeUTF8));
         pushButton_OK->setText(QApplication::translate("AddCategoryDialog", "OK", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

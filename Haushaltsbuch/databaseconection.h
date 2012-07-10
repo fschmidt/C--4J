@@ -81,12 +81,12 @@ public:
         m_database.close();
     }
 
-    void deleteCategory(Category &category){
+    void deleteCategory(int categoryId){
         m_database.open();
 
         QSqlQuery query;
         query.prepare("DELETE FROM `cpp`.`category` WHERE `category`.`id` = :id ");
-        query.bindValue(":id", category.id());
+        query.bindValue(":id", categoryId);
         query.exec();
 
         m_database.close();

@@ -21,10 +21,10 @@ int main(int argc, char *argv[]){
 
     QString host = QString::fromStdString(config["host"]);
     QString dbname = QString::fromStdString(config["db"]);
-    QString name = QString::fromStdString(config["name"]);
+    QString name = QString::fromStdString(config["user"]);
     QString pw = QString::fromStdString(config["passwort"]);
 
-    DatabaseConection db = DatabaseConection();//host, dbname, name, pw);
+    DatabaseConection db = DatabaseConection(host, dbname, name, pw);
 
     QApplication a(argc, argv);
     MainWindow w;

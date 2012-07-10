@@ -2,20 +2,46 @@
 <ui version="4.0">
  <class>deleteCategoryDialog</class>
  <widget class="QDialog" name="deleteCategoryDialog">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>229</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Delete Category</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QListView" name="listView_Category"/>
+    <widget class="QTableView" name="tableView_Category">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item>
     <widget class="QWidget" name="widget" native="true">
@@ -37,16 +63,16 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_Delete">
+       <widget class="QPushButton" name="pushButton_Cancel">
         <property name="text">
-         <string>Delete</string>
+         <string>Cancel</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_OK">
+       <widget class="QPushButton" name="pushButton_Delete">
         <property name="text">
-         <string>OK</string>
+         <string>Delete</string>
         </property>
        </widget>
       </item>
@@ -55,6 +81,10 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushButton_Cancel</tabstop>
+  <tabstop>pushButton_Delete</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

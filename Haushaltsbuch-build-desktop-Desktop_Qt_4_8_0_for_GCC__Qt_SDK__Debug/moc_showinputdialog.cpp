@@ -1,15 +1,15 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'addcategorydialog.h'
+** Meta object code from reading C++ file 'showinputdialog.h'
 **
-** Created: Tue Jul 10 12:08:43 2012
+** Created: Tue Jul 10 12:42:56 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../Haushaltsbuch/addcategorydialog.h"
+#include "../Haushaltsbuch/showinputdialog.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'addcategorydialog.h' doesn't include <QObject>."
+#error "The header file 'showinputdialog.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63
 #error "This file was generated using the moc from 4.8.0. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -17,7 +17,7 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-static const uint qt_meta_data_AddCategoryDialog[] = {
+static const uint qt_meta_data_ShowInputDialog[] = {
 
  // content:
        6,       // revision
@@ -31,55 +31,55 @@ static const uint qt_meta_data_AddCategoryDialog[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      19,   18,   18,   18, 0x0a,
+      17,   16,   16,   16, 0x0a,
 
        0        // eod
 };
 
-static const char qt_meta_stringdata_AddCategoryDialog[] = {
-    "AddCategoryDialog\0\0accept()\0"
+static const char qt_meta_stringdata_ShowInputDialog[] = {
+    "ShowInputDialog\0\0showInput()\0"
 };
 
-void AddCategoryDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void ShowInputDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         Q_ASSERT(staticMetaObject.cast(_o));
-        AddCategoryDialog *_t = static_cast<AddCategoryDialog *>(_o);
+        ShowInputDialog *_t = static_cast<ShowInputDialog *>(_o);
         switch (_id) {
-        case 0: _t->accept(); break;
+        case 0: _t->showInput(); break;
         default: ;
         }
     }
     Q_UNUSED(_a);
 }
 
-const QMetaObjectExtraData AddCategoryDialog::staticMetaObjectExtraData = {
+const QMetaObjectExtraData ShowInputDialog::staticMetaObjectExtraData = {
     0,  qt_static_metacall 
 };
 
-const QMetaObject AddCategoryDialog::staticMetaObject = {
-    { &QDialog::staticMetaObject, qt_meta_stringdata_AddCategoryDialog,
-      qt_meta_data_AddCategoryDialog, &staticMetaObjectExtraData }
+const QMetaObject ShowInputDialog::staticMetaObject = {
+    { &QDialog::staticMetaObject, qt_meta_stringdata_ShowInputDialog,
+      qt_meta_data_ShowInputDialog, &staticMetaObjectExtraData }
 };
 
 #ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &AddCategoryDialog::getStaticMetaObject() { return staticMetaObject; }
+const QMetaObject &ShowInputDialog::getStaticMetaObject() { return staticMetaObject; }
 #endif //Q_NO_DATA_RELOCATION
 
-const QMetaObject *AddCategoryDialog::metaObject() const
+const QMetaObject *ShowInputDialog::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
-void *AddCategoryDialog::qt_metacast(const char *_clname)
+void *ShowInputDialog::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_AddCategoryDialog))
-        return static_cast<void*>(const_cast< AddCategoryDialog*>(this));
+    if (!strcmp(_clname, qt_meta_stringdata_ShowInputDialog))
+        return static_cast<void*>(const_cast< ShowInputDialog*>(this));
     return QDialog::qt_metacast(_clname);
 }
 
-int AddCategoryDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int ShowInputDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QDialog::qt_metacall(_c, _id, _a);
     if (_id < 0)
